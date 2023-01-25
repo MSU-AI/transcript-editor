@@ -1,0 +1,98 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins', sans-serif;
+    box-sizing: border-box;
+
+}
+
+.hero {
+    background: #1d2026;
+    min-height: 100vh;
+    width: 100%;
+    color: #fff;
+    position: relative;
+
+}
+
+nav{
+    display: flex;
+    align-items: center;
+    padding: 20px 8%;
+}
+
+nav .menu-img {
+    width: 25px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+nav .logo {
+    width: 160px;
+    cursor: pointer;
+
+}
+
+nav ul{
+    flex: 1;
+    text-align: right;
+
+}
+
+nav ul li{
+    display: inline-block;
+    list-style: none;
+    margin: 0 20px;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: white;
+}
+
+button{
+    background: #efefef;
+    height: 30px;
+    width: 60px;
+    border-radius: 20px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+}
+
+button span {
+    display: block;
+    background: #999;
+    height: 26px;
+    width: 26px;
+    border-radius: 50%;
+    margin-left: 2px;
+
+}
+
+.text-container{
+    max-width: 600px;
+    margin-top: 7%;
+    margin-left: 50%;
+}
+
+.text-container h1{
+    font-size: 80px;
+    font-weight: 400;
+}
+
+.text-container p{
+    font-size: 25px;
+}
+
+.text-container a{
+    text-decoration: none;
+    background: #00986f;
+    padding: 10px 40px;
+    display: inline-block;
+    color: #fff;
+    font-size: 18px;
+    margin-top: 30px;
+    border-radius: 30px;
+
+}
