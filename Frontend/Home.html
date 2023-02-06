@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="navbar">
+    <nav>
+        <img src="images/menu.png" class="menu-img">
+        <img src="images/Logo.png" class="logo">
+        <ul>
+            <li><a href="">Start</a></li>
+            <!-- <li><a href="">Hello</a></li>
+            <li><a href="">Contemporary</a></li>
+            <li><a href="">Affordable</a></li> -->
+        </ul>
+    </nav>
+  </div>
+
+  
+
+  <div id="editor-container">
+
+    <div class="text-container">
+      <h1>Revolutionizing <br> Video Editing</h1>
+      <p>Using the latest AI technology we provide a new and improved way to edit your videos.</p>
+      <a href="">Upload your video</a>
+    </div>
+
+    <!-- <button id="center-button">Click Me</button> -->
+    <div id="editor"></div>
+  </div>
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+  <script>
+    var editor = new Quill('#editor', {
+      modules: {
+        toolbar: false
+      },
+      placeholder: false,
+      theme: 'snow'
+    });
+    editor.root.innerHTML = '<p>Test one two three </p>';
+  </script>
+</body>
+</html>
