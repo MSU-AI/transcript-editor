@@ -5,9 +5,7 @@ const spawner = require('child_process').spawn;
 const data_passed_in = 'Hello World';
 console.log['Data sent to Python: ', data_passed_in];
 
-const python_process = spawner('python', ['./jstopy.py'])
-
-// const python_process = spawner('python',['/Users/anasshaaban/Parallels/jstopy.py', item]);
+const python_process = spawner('python',['./jstopy.py', data_passed_in]);
 
 python_process.stdout.on('data', (data) => {
     console.log('stdout:', data.toString());
