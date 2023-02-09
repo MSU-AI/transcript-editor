@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="video-editing.css">
+  </head>
+  <body>
+    <div id="navbar">
+      <nav>
+          <img src="images/menu.png" class="menu-img">
+          <img src="images/Logo.png" class="logo">
+          <ul>
+              <!-- <li><a href="">Start</a></li> -->
+              <!-- <li><a href="">Hello</a></li>
+              <li><a href="">Contemporary</a></li>
+              <li><a href="">Affordable</a></li> -->
+          </ul>
+      </nav>
+    </div>
+
+    <!-- Transcript Container -->
+    <div class="editor-container">
+      <div class="transcript-container">
+        <div class="transcript-header">
+          Transcript Editor
+        </div>
+
+        <!-- <textarea class="transcript-textarea"></textarea> Will not use text area for now 
+        since we are not ready to add the addition functionality -->
+        
+        <!-- Transcript -->
+        <div id = "transcript">
+          <p data-time="0">Testing for the length of the transcript container. The ultimate competitive video game is jujetsu. Test Test Test Test Test Test Test Test Test Test Test Test </p>
+          <p data-time="5">This is the second line of the transcript.</p>
+          <p data-time="10">This is the third line of the transcript.</p>
+        </div>
+        <div class="transcript-controls">
+          <button id="save-transcript-button">Save</button>
+        </div>
+      </div>
+
+      <!-- Video -->
+      <div class="video-container">
+        <div class="video-header">
+          Video Editor
+        </div>
+        <video id="video" src="assets/video.mp4" controls></video>
+        <!-- <canvas class="video-canvas"></canvas>  We do not need a canvas for now -->
+
+        <!-- Timeline -->
+        <div class="timeline">
+          <div class="timeline-container">
+            <div class="timeline-header">
+              Video Editor Timeline
+            </div>
+            <div class="timeline"></div>
+            <div class="timeline-controls">
+              <button id="play-button">Play</button>
+              <button id="pause-button">Pause</button>
+              <button id="stop-button">Stop</button>
+            </div>
+          </div>
+          
+          <script src="video-editing.js"></script>
+        </div>

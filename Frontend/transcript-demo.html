@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <style>
+      #transcript p {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <video id="video" src="assets/video.mp4"></video>
+    <div id="transcript">
+      <p data-time="0">This is the first line of the transcript.</p>
+      <p data-time="5">This is the second line of the transcript.</p>
+      <p data-time="10">This is the third line of the transcript.</p>
+    </div>
+    <script>
+      // Get the transcript element
+      var transcript = document.getElementById("transcript");
+
+      // Get all the transcript lines
+      var lines = transcript.getElementsByTagName("p");
+
+      // Loop through each line
+      for (var i = 0; i < lines.length; i++) {
+        // Get the current line
+        var line = lines[i];
+
+        // Get the time attribute from the line
+        var time = line.getAttribute("data-time");
+
+        // Add a click event listener to the line
+        line.addEventListener("click", function() {
+          // Get the video element
+          var video = document.getElementById("video");
+
+          // Set the video's current time to the time attribute
+          video.currentTime = this.getAttribute("data-time");
+
+          // Play the video
+          video.play();
+        })
+    }
+    </script>
