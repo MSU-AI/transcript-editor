@@ -3,24 +3,28 @@
     <link rel="stylesheet" href="video-editing.css">
   </head>
   <body>
-    <div id="navbar">
-      <nav>
-          <img src="images/menu.png" class="menu-img">
-          <img src="images/Logo.png" class="logo">
-          <ul>
-              <!-- <li><a href="">Start</a></li> -->
-              <!-- <li><a href="">Hello</a></li>
-              <li><a href="">Contemporary</a></li>
-              <li><a href="">Affordable</a></li> -->
-          </ul>
-      </nav>
-    </div>
+    
+    
 
     <!-- Transcript Container -->
-    <div class="editor-container">
+    <div id="editor-container">
+
+      <div id="navbar">
+        <nav>
+            <img src="images/menu.png" class="menu-img">
+            <img src="images/Logo.png" class="logo">
+            <ul>
+                <!-- <li><a href="">Start</a></li> -->
+                <!-- <li><a href="">Hello</a></li>
+                <li><a href="">Contemporary</a></li>
+                <li><a href="">Affordable</a></li> -->
+            </ul>
+        </nav>
+      </div>
+
       <div class="transcript-container">
         <div class="transcript-header">
-          Transcript Editor
+          <p>Transcript Editor</p>
         </div>
 
         <!-- <textarea class="transcript-textarea"></textarea> Will not use text area for now 
@@ -44,6 +48,7 @@
         </div>
         <video id="video" src="assets/video.mp4" controls></video>
         <!-- <canvas class="video-canvas"></canvas>  We do not need a canvas for now -->
+      
 
         <!-- Timeline -->
         <div class="timeline">
@@ -58,6 +63,13 @@
               <button id="stop-button">Stop</button>
             </div>
           </div>
-          
-          <script src="video-editing.js"></script>
         </div>
+
+      </div>
+      </div>
+
+      <script src="video-editing.js"></script>
+
+      </body>
+
+        
