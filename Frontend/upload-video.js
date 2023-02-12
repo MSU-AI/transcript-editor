@@ -2,7 +2,7 @@ const form = document.querySelector("form"),
 fileInput = document.querySelector(".file-input"),
 progressArea = document.querySelector(".progress-area"),
 uploadedArea = document.querySelector(".uploaded-area");
-video = document.querySelector(".video-feild");
+
 
 // form click event
 form.addEventListener("click", () =>{
@@ -18,9 +18,22 @@ fileInput.onchange = ({target})=>{
       let splitName = fileName.split('.');
       fileName = splitName[0].substring(0, 13) + "... ." + splitName[1];
     }
-    console.log(file);
-    uploadFile(fileName); //calling uploadFile with passing file name as an argument
+    uploadFile(fileName);
+    
+    var reader = new FileReader();
+
+    reader.onload = function(e){
+      var src = e.target.result;
+      var video = document.getElementById("video");
+      var source = document.getElementById("source")
+
+      source.setAttribute("src", src);
+      video.load();
+    }
+
+    reader.readAsDataURL(file)
   }
+  
 }
 
 // file upload function
@@ -67,8 +80,5 @@ function uploadFile(name){
     }
   });
   let data = new FormData(form); //FormData is an object to easily send form data
-  console.log(data.values());
   xhr.send(data); //sending form data
-
-  
 }
