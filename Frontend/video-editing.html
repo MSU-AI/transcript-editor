@@ -1,17 +1,28 @@
 <html>
   <head>
     <link rel="stylesheet" href="video-editing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
   </head>
   <body>
     
-    
+    <div id="wrapper">
+      <header>Upload A Video File</header>
+      <form action="#">
+        <input class="file-input" type="file" name="file" hidden>
+        <i class="fas fa-cloud-upload-alt"></i>
+        <p>Browse File to Upload</p>
+      </form>
+      <section class="progress-area"></section>
+      <section class="uploaded-area"></section>
+    </div>
 
     <!-- Transcript Container -->
     <div id="editor-container">
+      
+      
 
       <div id="navbar">
         <nav>
-            <img src="images/menu.png" class="menu-img">
             <img src="images/Logo.png" class="logo">
             <ul>
                 <!-- <li><a href="">Start</a></li> -->
@@ -24,7 +35,7 @@
 
       <div class="transcript-container">
         <div class="transcript-header">
-          <p>Transcript Editor</p>
+          <p></p>
         </div>
 
         <!-- <textarea class="transcript-textarea"></textarea> Will not use text area for now 
@@ -43,18 +54,20 @@
 
       <!-- Video -->
       <div class="video-container">
-        <div class="video-header">
-          Video Editor
-        </div>
-        <video id="video" src="assets/video.mp4" controls></video>
+        <div class="video-feild">
+          
+        
+        <video id="video" controls>
+          <source id="source" type="video/mp4">
+        </video>
         <!-- <canvas class="video-canvas"></canvas>  We do not need a canvas for now -->
-      
+      </div>
 
         <!-- Timeline -->
         <div class="timeline">
           <div class="timeline-container">
             <div class="timeline-header">
-              Video Editor Timeline
+              Timeline
             </div>
             <div class="timeline"></div>
             <div class="timeline-controls">
@@ -68,6 +81,7 @@
       </div>
       </div>
 
+      <script src="upload-video.js"></script>
       <script src="video-editing.js"></script>
 
       </body>
