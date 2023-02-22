@@ -1,3 +1,14 @@
+let transcriptArea = document.getElementById("transcript");
+let transcriptHTML = ` `
+
+for (let i =0; i<10; i++){
+    transcriptHTML += `<p data-time="`+i*5+`">Testing for the length of the transcript container. </p>`
+}
+console.log(transcriptHTML);
+transcriptArea.innerHtml = "<p> Hello world </p>";
+console.log(transcriptArea.innerHtml);
+
+
 // This script deals with adding functionality to the transcript, and all other features on the site
 var transcript = document.getElementById("transcript");
 
