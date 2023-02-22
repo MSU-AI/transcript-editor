@@ -7,7 +7,9 @@
     
     <div id="wrapper">
       <header>Upload A Video File</header>
-      <form action="#">
+      <form method ="POST" enctype = "multipart/form-data">
+        <!-- {% csrf_token %} -->
+        <!-- {{ form.as_p }} -->
         <input class="file-input" type="file" name="file" hidden>
         <i class="fas fa-cloud-upload-alt"></i>
         <p>Browse File to Upload</p>
