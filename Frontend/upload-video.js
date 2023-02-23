@@ -76,9 +76,12 @@ function uploadFile(name){
       uploadedArea.classList.remove("onprogress");
       uploadedArea.innerHTML = uploadedHTML; 
       document.getElementById("wrapper").style.visibility = "hidden";
+      
 
     }
   });
   let data = new FormData(form); //FormData is an object to easily send form data
   xhr.send(data); //sending form data
 }
+
+
