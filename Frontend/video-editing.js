@@ -1,12 +1,14 @@
 let transcriptArea = document.getElementById("transcript");
 let transcriptHTML = ` `;
 
+function load(){
 fetch('assets/output.json')
   .then(response => response.json())
   .then(data => {
     // Use the data object here
     processData(data);
   });
+}
 
 function processData(data) {
 

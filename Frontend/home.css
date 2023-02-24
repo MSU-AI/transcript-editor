@@ -90,7 +90,7 @@
   }
 
   nav .logo {
-      transform: translateY(-20%);
+      transform: translateY(-18%);
       cursor: pointer;
 
   }
@@ -98,6 +98,7 @@
   nav ul{
       flex: 1;
       text-align: right;
+      display: inline-block;
 
   }
 
@@ -108,21 +109,35 @@
       
   }
 
+  nav ul li a#login {
+    text-decoration: none;
+    background: #00986f;
+    padding: 10px 40px;
+    display: inline-block;
+    color: #fff;
+    border-radius: 3px;
+    
+  }
+
   nav ul li a{
       text-decoration: none;
       color: white;
   }
 
 
-  /* button{
-    background: #efefef;
-    height: 30px;
-    width: 60px;
-    border-radius: 20px;
-    border: 0;
-    outline: 0;
+
+button{
+    background: #00986f;
+    background: #00986f;
+    padding: 10px 20px;
+    display: inline-block;
+    color: #fff;
+    border-radius: 6px;
+    font-size: 16px;
     cursor: pointer;
 }
+
+/*
 
 button span {
     display: block;
