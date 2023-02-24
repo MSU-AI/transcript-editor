@@ -1,15 +1,37 @@
 
-  #navbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 50px;
-    background-color: #1d2026;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
+ body {
+  background-color: #1d2026;
+  overflow: hidden;
+ }
+ #navbar {
+  background: #1d2026;
+  height: 100vh;
+  width: 100%;
+  color: #fff;
+  position: relative;
   }
+
+  .camera-container{
+    position: absolute;
+    top: 30%;
+    left: 2%;
+    width: 650px;
+    transition: 0.3s;
+  }
+
+  .camera{
+    width: 100%;
+    transition: 0.3s;
+  }
+  
+  
+
+  .light{
+    position: absolute;
+    width: 250%;
+    transform: translateX(-12%) translateY(-30%);
+  }
+
   #editor-container {
     position: absolute;
     top: 50px;
@@ -58,6 +80,7 @@
   display: flex;
   align-items: center;
   padding: 20px 8%;
+  background-color: #1d2026;
   }
 
   nav .menu-img {
@@ -67,7 +90,7 @@
   }
 
   nav .logo {
-      width: 160px;
+      transform: translateY(-20%);
       cursor: pointer;
 
   }
@@ -82,6 +105,7 @@
       display: inline-block;
       list-style: none;
       margin: 0 20px;
+      
   }
 
   nav ul li a{
@@ -122,12 +146,23 @@ button span {
     font-size: 80px;
     font-weight: 400;
     color: white;
+    transition: 0.3s;
+}
+
+.text-container h1:hover{
+  color: #f2ffb7;
+  font-size: 84px;
 }
 
 .text-container p{
     font-size: 25px;
     color: white;
+    transition: 0.3s;
 }
+/* .text-container p:hover{
+  color: #f2ffb7;
+  font-size: 29px;
+} */
 
 .text-container a{
     text-decoration: none;

@@ -150,7 +150,8 @@ nav .menu-img {
 }
 
 nav .logo {
-    width: 160px;
+    /* width: 160px; */
+    
     cursor: pointer;
 
 }
@@ -194,7 +195,12 @@ nav ul li a{
   font-family: Arial, sans-serif;
   padding: 50px;
   border: 2px white;
+  overflow: scroll;
   
+}
+
+.transcript-container::-webkit-scrollbar{
+  display: none;
 }
 
 .transcript-header {
@@ -206,10 +212,14 @@ nav ul li a{
 #transcript p{
   font-size: 24px;
   font-weight: bold;
+  
+}
+
+#transcript span{
   transition: 0.32s;
 }
 
-#transcript p:hover{
+#transcript span:hover{
   color: #00d199;
   font-size: 28px;
 }
@@ -263,7 +273,7 @@ nav ul li a{
   width: 100%;
 }
 
-.timeline {
+#timeline {
   width: 100%;
   height: 20%;
   margin-top: 20px;

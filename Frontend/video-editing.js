@@ -1,33 +1,58 @@
 let transcriptArea = document.getElementById("transcript");
-let transcriptHTML = ` `
+let transcriptHTML = ` `;
 
-for (let i =0; i<10; i++){
-    transcriptHTML += `<p data-time="`+i*5+`">Testing for the length of the transcript container. </p>`
+fetch('assets/output.json')
+  .then(response => response.json())
+  .then(data => {
+    // Use the data object here
+    processData(data);
+  });
+
+function processData(data) {
+
+    line = '';
+    paragraph = `<p>`
+    console.log(data["timestamps"]);
+    data = data["timestamps"];
+    for (i = 0; i < data.length; i++) {
+        for (j=0; j<data[i]["words"].length; j++) { 
+            words = data[i]["words"][j];
+            word = words['word'];
+            
+            if (line.length + word.length > 40) {
+                paragraph += `</p>`;
+                transcriptHTML += paragraph;
+                paragraph = '<p>';
+                line = word;
+            } else {
+                line += `${word}`;
+                paragraph += `<span data-time=${words['start']}>${word}</span>`;
+            }
+        }
+    }
+
+    // transcriptHTML += `<p data-time="${words['end']}">${line.trim()}</p>`;
+
+    transcriptArea.innerHTML = transcriptHTML;
+
+    // Add event listeners to the lines
+    var words = transcriptArea.getElementsByTagName("span");
+    for (var i = 0; i < words.length; i++) {
+        var word = words[i];
+        var time = word.getAttribute("data-time");
+
+        word.addEventListener("click", (function(time) {
+            return function() {
+                var video = document.getElementById("video");
+
+                // Set the video's current time to the time attribute
+                video.currentTime = time;
+                video.play();
+            }
+        })(time));
+    }
 }
-console.log(transcriptHTML);
-transcriptArea.innerHtml = "<p> Hello world </p>";
-console.log(transcriptArea.innerHtml);
 
-
-// This script deals with adding functionality to the transcript, and all other features on the site
-var transcript = document.getElementById("transcript");
-
-var lines = transcript.getElementsByTagName("p");
-
-for (var i = 0; i < lines.length; i++) {
-    var line = lines[i];
-    var time = line.getAttribute("data-time");
-
-    // Add a click event listener to the line
-    line.addEventListener("click", function() {
-    var video = document.getElementById("video");
-
-    // Set the video's current time to the time attribute
-    video.currentTime = this.getAttribute("data-time");
-    video.play();
-    })
-}
-    
 document.getElementById("play-button").addEventListener("click", function() {
 // Code to play the video goes here
 });
