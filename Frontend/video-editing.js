@@ -11,7 +11,7 @@ fetch('assets/output.json')
 function processData(data) {
 
     line = '';
-
+    paragraph = `<p>`
     console.log(data["timestamps"]);
     data = data["timestamps"];
     for (i = 0; i < data.length; i++) {
@@ -20,25 +20,28 @@ function processData(data) {
             word = words['word'];
             
             if (line.length + word.length > 40) {
-                transcriptHTML += `<p data-time="${words['start']}">${line.trim()}</p>`;
+                paragraph += `</p>`;
+                transcriptHTML += paragraph;
+                paragraph = '<p>';
                 line = word;
             } else {
                 line += `${word}`;
+                paragraph += `<span data-time=${words['start']}>${word}</span>`;
             }
         }
     }
 
-    transcriptHTML += `<p data-time="${words['end']}">${line.trim()}</p>`;
+    // transcriptHTML += `<p data-time="${words['end']}">${line.trim()}</p>`;
 
     transcriptArea.innerHTML = transcriptHTML;
 
     // Add event listeners to the lines
-    var lines = transcriptArea.getElementsByTagName("p");
-    for (var i = 0; i < lines.length; i++) {
-        var line = lines[i];
-        var time = line.getAttribute("data-time");
+    var words = transcriptArea.getElementsByTagName("span");
+    for (var i = 0; i < words.length; i++) {
+        var word = words[i];
+        var time = word.getAttribute("data-time");
 
-        line.addEventListener("click", (function(time) {
+        word.addEventListener("click", (function(time) {
             return function() {
                 var video = document.getElementById("video");
 

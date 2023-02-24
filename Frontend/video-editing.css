@@ -212,10 +212,14 @@ nav ul li a{
 #transcript p{
   font-size: 24px;
   font-weight: bold;
+  
+}
+
+#transcript span{
   transition: 0.32s;
 }
 
-#transcript p:hover{
+#transcript span:hover{
   color: #00d199;
   font-size: 28px;
 }
