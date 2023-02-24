@@ -82,6 +82,7 @@ function uploadFile(name){
   });
   let data = new FormData(form); //FormData is an object to easily send form data
   xhr.send(data); //sending form data
+  load();
 }
 
 
