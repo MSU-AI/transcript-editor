@@ -2,7 +2,7 @@ let transcriptArea = document.getElementById("transcript");
 let transcriptHTML = ` `;
 
 function load(){
-fetch('assets/output.json')
+fetch('/static/assets/output.json')
   .then(response => response.json())
   .then(data => {
     console.log('Hello world');
