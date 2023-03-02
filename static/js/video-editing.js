@@ -30,8 +30,8 @@ function processData(data) {
                 paragraph = '<p>';
                 line = word;
             } else {
-                line += `${word}`;
-                paragraph += `<span data-time=${words['start']}>${word}</span>`;
+                line += ` ${word}`;
+                paragraph += `<span data-time=${words['start']}> ${word}</span>`;
             }
         }
     }
