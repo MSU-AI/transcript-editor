@@ -18,7 +18,7 @@ fileInput.onchange = ({target})=>{
       let splitName = fileName.split('.');
       fileName = splitName[0].substring(0, 13) + "... ." + splitName[1];
     }
-    uploadFile(fileName);
+    uploadFile(file);
     
     var reader = new FileReader();
 
@@ -36,53 +36,59 @@ fileInput.onchange = ({target})=>{
   
 }
 
-// file upload function
-function uploadFile(name){
-  let xhr = new XMLHttpRequest(); //creating new xhr object (AJAX)
-  xhr.open("POST", "php/upload.php"); //sending post request to the specified URL
-  xhr.upload.addEventListener("progress", ({loaded, total}) =>{ //file uploading progress event
-    let fileLoaded = Math.floor((loaded / total) * 100);  //getting percentage of loaded file size
-    let fileTotal = Math.floor(total / 1000); //gettting total file size in KB from bytes
-    let fileSize;
-    // if file size is less than 1024 then add only KB else convert this KB into MB
-    (fileTotal < 1024) ? fileSize = fileTotal + " KB" : fileSize = (loaded / (1024*1024)).toFixed(2) + " MB";
-    let progressHTML = `<li class="row">
-                          <i class="fas fa-file-alt"></i>
-                          <div class="content">
-                            <div class="details">
-                              <span class="name">${name} • Uploading</span>
-                              <span class="percent">${fileLoaded}%</span>
-                            </div>
-                            <div class="progress-bar">
-                              <div class="progress" style="width: ${fileLoaded}%"></div>
-                            </div>
-                          </div>
-                        </li>`;
-    uploadedArea.innerHTML = ""; 
-    uploadedArea.classList.add("onprogress");
-    progressArea.innerHTML = progressHTML;
-    if(loaded == total){
-      progressArea.innerHTML = "";
-      let uploadedHTML = `<li class="row">
-                            <div class="content upload">
-                              <i class="fas fa-file-alt"></i>
-                              <div class="details">
-                                <span class="name">${name} • Uploaded</span>
-                                <span class="size">${fileSize}</span>
-                              </div>
-                            </div>
-                            <i class="fas fa-check"></i>
-                          </li>`;
-      uploadedArea.classList.remove("onprogress");
-      uploadedArea.innerHTML = uploadedHTML; 
-      document.getElementById("wrapper").style.visibility = "hidden";
-      
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+          }
+      }
+  }
+  return cookieValue;
+}
 
-    }
-  });
-  let data = new FormData(form); //FormData is an object to easily send form data
-  xhr.send(data); //sending form data
-  load();
+function doneHandler() {
+  console.log("Data from whisper");
+  console.log(this.responseText);
+
+  // Send the data along for processing
+  processData(JSON.parse(this.responseText))
+  // load();
 }
 
 
+// file upload function
+function uploadFile(file){
+  let xhr = new XMLHttpRequest(); //creating new xhr object (AJAX)
+
+  // Add event handler to be called when response is collected:
+
+  xhr.addEventListener("load", doneHandler);
+
+  // Define a POST request to uploads
+
+  xhr.open("POST", "/uploads/");
+
+  // Set the CSRF Token and set the content type
+
+  xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
+  xhr.setRequestHeader("Accept", "application/json");
+
+  // Build the form data and add the file
+
+  var formData = new FormData();
+  formData.append("file", file);
+
+  // Send the data
+
+  xhr.send(formData);
+
+  // Finally, hide the upload screen
+
+  document.getElementById("wrapper").style.visibility = "hidden";
+}

@@ -6,6 +6,8 @@ fetch('/static/assets/output.json')
   .then(response => response.json())
   .then(data => {
     console.log('Hello world');
+    console.log("Data from output.json");
+    console.log(data);
     // Use the data object here
     processData(data);
   });
@@ -20,7 +22,7 @@ function processData(data) {
     for (i = 0; i < data.length; i++) {
         for (j=0; j<data[i]["words"].length; j++) { 
             words = data[i]["words"][j];
-            word = words['word'];
+            word = words["text"];
             
             if (line.length + word.length > 40) {
                 paragraph += `</p>`;
