@@ -1,3 +1,5 @@
+console.log("last line test case");
+
 let transcriptArea = document.getElementById("transcript");
 let transcriptHTML = ` `;
 
@@ -5,9 +7,8 @@ function load(){
 fetch('/static/assets/output.json')
   .then(response => response.json())
   .then(data => {
-    console.log('Hello world');
     console.log("Data from output.json");
-    console.log(data);
+    // console.log(data);
     // Use the data object here
     processData(data);
   });
@@ -16,29 +17,53 @@ fetch('/static/assets/output.json')
 function processData(data) {
 
     line = '';
-    paragraph = `<p>`
+    paragraph = `<p>`;
     console.log(data["timestamps"]);
     data = data["timestamps"];
+
     for (i = 0; i < data.length; i++) {
+        // iterates through each line of transcript
         for (j=0; j<data[i]["words"].length; j++) { 
+            //iterates through each word of each line of transcript
+
             words = data[i]["words"][j];
+            // `words` represents the data for each word such as text, start and end time 
             word = words["text"];
             
-            if (line.length + word.length > 40) {
+            if (line.length + word.length > 38) {
+                // checks if the line is longer than 38 characters and if so it creates a new paragraph (goes to next line)
+                console.log(i + " " + line + ", " + word);
                 paragraph += `</p>`;
                 transcriptHTML += paragraph;
+                //ends the paragraph
+                
+                //new paragraph
                 paragraph = '<p>';
                 line = word;
+                paragraph += `<span data-time=${words['start']}> ${word}</span>`;
+
             } else {
+
                 line += ` ${word}`;
                 paragraph += `<span data-time=${words['start']}> ${word}</span>`;
             }
+
+            if (j == data[i]["words"].length-1 && i == data.length-1){
+                // checks if the last word has been reached
+                paragraph += `</p>`;
+                transcriptHTML += paragraph;
+            }
+
+            
         }
     }
 
     // transcriptHTML += `<p data-time="${words['end']}">${line.trim()}</p>`;
+    console.log("*********************** The Transcript HTML ****************************");
 
     transcriptArea.innerHTML = transcriptHTML;
+
+    console.log(transcriptArea);
 
     // Add event listeners to the lines
     var words = transcriptArea.getElementsByTagName("span");
