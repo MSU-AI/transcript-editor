@@ -1,3 +1,6 @@
+console.log("start of upload.js");
+
+
 const form = document.querySelector("form"),
 fileInput = document.querySelector(".file-input"),
 progressArea = document.querySelector(".progress-area"),
@@ -70,7 +73,7 @@ function uploadFile(file){
 
   xhr.addEventListener("load", doneHandler);
 
-  // Define a POST request to uploads
+  // Define bar POST request to uploads
 
   xhr.open("POST", "/uploads/");
 
@@ -90,5 +93,49 @@ function uploadFile(file){
 
   // Finally, hide the upload screen
 
-  document.getElementById("wrapper").style.visibility = "hidden";
+  document.getElementById("wrapper").style.display = "none";
+
+  // If the upload feild is gone show the loading bar
+
+  if(document.getElementById("wrapper").style.display == "none"){
+
+    let container = document.getElementById("loading-container");
+    let fill = document.querySelector(".fill");
+    let transcript = document.querySelector(".transcript-container").innerHTML;
+    console.log(transcript);
+
+    container.style.display = "block";
+    const video = document.getElementById('video');
+    let video_len;
+
+    // Check if video has been loaded and grab the length of the video
+
+    video.addEventListener('loadedmetadata', () => {
+      video_len = video.duration;
+      console.log(video_len);
+    });
+
+    // Loop through the video length
+
+    var bar = 0;
+    var run = setInterval(frames,2);
+    function frames(){
+      bar++;
+      if (fill.style.width.substring(0,3) == "100"){
+          clearInterval(run);
+          container.style.display = "none";
+      }else{
+          fill.style.width = bar/video_len + "%";
+      }
+
+      if (document.querySelector(".transcript-container").innerHTML != transcript){
+        fill.style.width = "100%";
+      }
+  }
+
+  } 
+  
+
 }
+
+
