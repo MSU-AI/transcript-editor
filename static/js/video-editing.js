@@ -1,4 +1,5 @@
-console.log("last line test case");
+console.log("start of video-editing.js");
+
 
 let transcriptArea = document.getElementById("transcript");
 let transcriptHTML = ` `;
@@ -43,7 +44,6 @@ function processData(data) {
                 paragraph += `<span data-time=${words['start']}> ${word}</span>`;
 
             } else {
-
                 line += ` ${word}`;
                 paragraph += `<span data-time=${words['start']}> ${word}</span>`;
             }

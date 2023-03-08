@@ -23,6 +23,14 @@
       <section class="progress-area"></section>
       <section class="uploaded-area"></section>
     </div>
+    
+    <div id="loading-container">
+      <div class="bar">
+          <div class="fill"></div>
+      </div>
+    </div>
+
+    <button onclick="upload()">upload</button>
 
     <!-- Transcript Container -->
     <div id="editor-container">
@@ -31,12 +39,7 @@
 
       <div id="navbar">
         <nav>
-            <!-- <a href="Home.html"><img src="images/Logo.png" class="logo"></a> -->
             <ul>
-                <!-- <li><a href="">Start</a></li> -->
-                <!-- <li><a href="">Hello</a></li>
-                <li><a href="">Contemporary</a></li>
-                <li><a href="">Affordable</a></li> -->
             </ul>
         </nav>
       </div>
@@ -46,11 +49,10 @@
           <p></p>
         </div>
 
-        <!-- <textarea class="transcript-textarea"></textarea> Will not use text area for now 
-        since we are not ready to add the addition functionality -->
+       
         
         <!-- Transcript -->
-        <div id = "transcript">
+      <div id = "transcript">
           
         </div>
         <div class="transcript-controls">
@@ -66,7 +68,6 @@
         <video id="video" controls>
           <source id="source" type="video/mp4">
         </video>
-        <!-- <canvas class="video-canvas"></canvas>  We do not need a canvas for now -->
       </div>
 
         <!-- Timeline -->
