@@ -45,6 +45,9 @@
       </div>
 
       <div class="transcript-container">
+          <div class="transcript-controls">
+              <button id="save-transcript-button", onclick="editMode()">Edit</button>
+          </div>
         <div class="transcript-header">
           <p></p>
         </div>
@@ -54,10 +57,7 @@
         <!-- Transcript -->
       <div id = "transcript">
           
-        </div>
-        <div class="transcript-controls">
-          <button id="save-transcript-button">Save</button>
-        </div>
+        </div> 
       </div>
 
       <!-- Video -->
@@ -88,7 +88,8 @@
       </div>
       </div>
       <script src="{% static 'js/upload-video.js' %}"></script>
-      <script src="{% static 'js/video-editing.js' %}"></script>
+      <script src="{% static 'js/transcript-generation.js' %}"></script>
+      <script src="{% static 'js/transcript-editing.js' %}"></script>
       
       
 

@@ -225,14 +225,40 @@ nav ul li a{
   padding: 50px;
   border: 2px white;
   overflow: scroll;
-  
 }
-
 .transcript-container::-webkit-scrollbar{
   display: none;
 }
+.transcript-container-editing {
+  width: 30%;
+  height: 70%;
+  float: left;
+  font-family: Arial, sans-serif;
+  padding: 50px;
+  border: 2px white;
+  overflow: scroll;
+  background: #404040;
+}
+.transcript-container-editing::-webkit-scrollbar{
+  display: none;
+}
 
-.transcript-header {
+#transcript-editing {}
+
+#transcript-editing p{
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#transcript-editing span::selection{
+    background-color:#00d199;
+}
+
+
+#transcript-editing span{}
+
+#transcript-header {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
@@ -248,7 +274,7 @@ nav ul li a{
   transition: 0.32s;
 }
 
-#transcript span:hover{
+#transcript span:hover {
   color: #00d199;
   font-size: 28px;
 }
