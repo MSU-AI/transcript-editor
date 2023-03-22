@@ -217,9 +217,25 @@ nav ul li a{
   color: white;
 }
 
-.transcript-container {
+#save-transcript{
+    display: none;
+}
+
+#delete-transcript{
+    display: none;
+}
+
+.transcript-container-wrapper {
   width: 30%;
-  height: 70%;
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+}
+
+.transcript-container {
+  width: 100%;
+  height: 100%;
+  margin-left: 3%;
   float: left;
   font-family: Arial, sans-serif;
   padding: 50px;
@@ -230,8 +246,9 @@ nav ul li a{
   display: none;
 }
 .transcript-container-editing {
-  width: 30%;
-  height: 70%;
+  width: 100%;
+  height: 100%;
+  margin-left: 3%;
   float: left;
   font-family: Arial, sans-serif;
   padding: 50px;
@@ -248,7 +265,7 @@ nav ul li a{
 #transcript-editing p{
     font-size: 24px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 2%;
 }
 
 #transcript-editing span::selection{
@@ -290,7 +307,9 @@ nav ul li a{
 } */
 
 .transcript-controls {
-  margin-top: 20px;
+  margin-top: 10%;
+  margin-bottom: 5px;
+  margin-left: 3%;
   text-align: right;
 }
 

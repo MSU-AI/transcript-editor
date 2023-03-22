@@ -44,20 +44,24 @@
         </nav>
       </div>
 
-      <div class="transcript-container">
-          <div class="transcript-controls">
-              <button id="save-transcript-button", onclick="editMode()">Edit</button>
-          </div>
-        <div class="transcript-header">
-          <p></p>
-        </div>
+      <div class="transcript-container-wrapper">
 
-       
-        
-        <!-- Transcript -->
-      <div id = "transcript">
-          
-        </div> 
+          <div class="transcript-controls">
+              <button id="edit-transcript", onclick="editTranscript()">Edit</button>
+              <button id="save-transcript", onclick="saveTranscript()">Save</button>
+              <button id="delete-transcript", onclick="deleteTranscript()">delete</button> 
+          </div>
+
+          <div class="transcript-container">
+              <div class="transcript-header">
+                  <p></p>
+              </div>
+
+              <!-- Transcript -->
+              <div id = "transcript">
+
+              </div> 
+          </div>
       </div>
 
       <!-- Video -->
