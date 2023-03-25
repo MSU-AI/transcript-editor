@@ -1,3 +1,5 @@
+from os import remove
+
 # from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
@@ -29,7 +31,7 @@ def upload_file(request):
 
             print("File is valid")
 
-            filename = handle_uploaded_file(request.FILES["file"])
+            filename, file = handle_uploaded_file(request.FILES["file"])
 
             # Now, transcode the file:
 
@@ -56,5 +58,9 @@ def upload_file(request):
                 # Save the data to a final dictionary:
 
                 output['timestamps'].append({'text': text, 'start_time': start, 'words': words})
+
+                # Finally, delete the file:
+
+                file.delete(filename)
 
         return JsonResponse(output) # Return a "No Content" response
