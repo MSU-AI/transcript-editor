@@ -10,6 +10,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{% static 'timeline/samples/css/default.css' %}" rel="stylesheet"/>
+    
     <script src="{% static 'timeline/bower_components/jquery/dist/jquery.js' %}"></script>
     <script src="{% static 'timeline/bower_components/jquery-ui/jquery-ui.min.js' %}"></script>        
     <script src="{% static 'timeline/bower_components/raphael/raphael.js' %}"></script>
@@ -18,7 +19,9 @@
     <!-- /style-player -->        
     <!-- script-player -->        
     <script src="{% static 'timeline/build/js/amalia.js.min.js' %}"></script>
-    <script src="{% static 'timeline/build/js/amalia.js.min.js' %}"></script>        
+    <script src="{% static 'timeline/build/js/amalia.js.min.js' %}"></script>    
+
+    <script src="{% static 'timeline/build/js/i18n/amalia.js-message-en.js' %}"></script>
     <!-- /script-player -->
 
     <title>Transcript-Editing</title>
@@ -78,7 +81,7 @@
       </div>
 
       <!-- Video -->
-      <div class="video-container">
+<!--      <div class="video-container">
         <div class="video-feild">
           
         
@@ -89,7 +92,7 @@
 
         <!-- Timeline -->
 
-        <div class="container">
+        <div class="video-container">
             <div class="header">
                  
             </div>
@@ -107,7 +110,12 @@
       <script src="{% static 'js/upload-video.js' %}"></script>
       <script src="{% static 'js/transcript-generation.js' %}"></script>
       <script src="{% static 'js/transcript-editing.js' %}"></script>
-      
+      <script>       
+          document.addEventListener("DOMContentLoaded", function() {
+              console.log("----------------DOMContentLoaded------------------------")
+          });
+    </script>
+
       
 
       </body>

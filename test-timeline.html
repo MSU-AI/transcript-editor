@@ -1,0 +1,137 @@
+{% load static%}
+
+<html>
+  <head>
+    <link rel="icon" type="image/png" href= 'static/images/Logo-32.png' sizes="32x32" />
+    <link rel="icon" type="image/png" href='static/images/Logo-16.png' sizes="16x16" />
+
+    <link rel="stylesheet" href='static/css/video-editing.css'>
+    <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href= 'static/timeline/samples/css/default.css' rel="stylesheet">
+    <script src='static/timeline/bower_components/jquery/dist/jquery.js'></script>
+    <script src='static/timeline/bower_components/jquery-ui/jquery-ui.min.js' ></script>        
+    <script src='static/timeline/bower_components/raphael/raphael.js'></script>
+    <!-- style-player -->        
+    <link href='static/timeline/build/css/amalia.js.min.css'  rel="stylesheet">
+    <!-- /style-player -->        
+    <!-- script-player -->        
+    <script src='static/timeline/build/js/amalia.js.min.js'></script>
+    <script src='static/timeline/build/js/amalia.js-plugin-timeline.min.js'></script>        
+    <!-- /script-player -->
+
+    <title>Transcript-Editing</title>
+  </head>
+  <body>
+    
+    
+
+    <!-- Transcript Container -->
+    <div id="editor-container">
+      
+      
+
+      <div id="navbar">
+        <nav>
+            <ul>
+            </ul>
+        </nav>
+      </div>
+
+      <div class="transcript-container-wrapper">
+
+          <div class="transcript-controls">
+              <button id="edit-transcript", onclick="editTranscript()">Edit</button>
+              <button id="save-transcript", onclick="saveTranscript()">Save</button>
+              <button id="delete-transcript", onclick="deleteTranscript()">delete</button> 
+          </div>
+
+          <div class="transcript-container">
+              <div class="transcript-header">
+                  <p></p>
+              </div>
+
+              <!-- Transcript -->
+              <div id = "transcript">
+
+              </div> 
+          </div>
+      </div>
+
+      <!-- Video -->
+      
+        <!-- Timeline -->
+
+        <div class="container">
+            <div class="header">
+                <h1>Plugin timeline</h1>  
+            </div>
+            <div class="content">           
+                <div class="demo">
+                    <div >
+                        <div id="defaultPlayer"></div>
+                    </div>
+                    <div id="amalia-timeline" style="height: 265px;"></div>
+                    <script>
+                        $( function () {
+                            $( "#defaultPlayer" ).mediaPlayer( {
+                                autoplay: false,
+                                src: 'static/timeline/samples-data/examples/vid/amalia01.mp4',
+                                controlBar: {
+                                    sticky: true
+                                },
+                                plugins: {
+                                    dataServices: [
+                                        'static/timeline/samples-data/examples/json/amalia01-events.json',
+                                        'static/timeline/samples-data/examples/json/amalia01-kf.json',
+                                        'static/timeline/samples-data/examples/json/amalia01-ball.json'
+                                    ],
+                                    list: [
+                                        {
+                                            'className': 'fr.ina.amalia.player.plugins.TimelinePlugin',
+                                            'container': '#amalia-timeline',
+                                            'parameters': {
+                                                listOfLines: [
+                                                    /*
+                                                    {
+                                                        title: 'Events',
+                                                        type: 'cuepoint',
+                                                        metadataId: 'events-amalia01',
+                                                        color: '#3CF',
+                                                        pointNav: true
+                                                    },
+                                                    {
+                                                        title: 'Ball moving up',
+                                                        type: 'segment',
+                                                        metadataId: 'ball-amalia01',
+                                                        color: '#F00'
+                                                    },
+                                                    */
+                                                    {
+                                                        title: 'Keyframes every 2s',
+                                                        type: 'image',
+                                                        metadataId: 'kf-amalia01',
+                                                        pointNav: true,
+                                                        editable: true
+                                                    }
+                                                ],
+                                                editingMode: true
+                                            }
+                                        }
+                                    ]
+                                }
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+      </div>
+      <script src= 'static/js/upload-video.js' ></script>
+      <script src= 'static/js/transcript-generation.js' ></script>
+      <script src= 'static/js/transcript-editing.js' ></script>
+
+
+
+  </body>
