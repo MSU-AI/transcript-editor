@@ -38,9 +38,11 @@ function generateTimeline(src) {
                                 title: 'Keyframes every 2s',
                                 type: 'image',
                                 metadataId: 'kf-amalia01',
-                                pointNav: true
+                                pointNav: true,
+                                editable: true
                             }
-                        ]
+                        ],
+                        editingMode: true
                     }
                 }
             ]
