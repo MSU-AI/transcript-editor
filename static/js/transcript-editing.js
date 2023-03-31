@@ -37,3 +37,12 @@ function saveTranscript(){
 function deleteTranscript(){
     console.log("del transcript element");
 }
+
+function downloadTranscript(){
+    console.log("downloading transcript");
+
+    // var link = document.createElement("a");
+    // link.download = name;
+    // link.href = uri;
+    // link.click();
+}
