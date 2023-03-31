@@ -9,4 +9,4 @@ class UploadVideoForm(forms.Form):
 def handle_uploaded_file(f):
     fs = FileSystemStorage(location='uploads/')
     filename = fs.save(f.name, f)
-    return filename
+    return filename, fs

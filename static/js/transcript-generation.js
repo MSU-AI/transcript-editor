@@ -73,24 +73,14 @@ function processData(data) {
 
         word.addEventListener("click", (function(time) {
             return function() {
-                var video = document.getElementById("video");
+                let mediaPlayer = $("#defaultPlayer").data('fr.ina.amalia.player').getPlayer();;
 
-                // Set the video's current time to the time attribute
-                video.currentTime = time;
-                video.play();
+                // Set the media player's current time to the time attribute
+                mediaPlayer.seek(time);
+                mediaPlayer.play(); 
             }
         })(time));
     }
 }
 
-document.getElementById("play-button").addEventListener("click", function() {
-// Code to play the video goes here
-});
 
-document.getElementById("pause-button").addEventListener("click", function() {
-// Code to pause the video goes here
-});
-
-document.getElementById("stop-button").addEventListener("click", function() {
-// Code to stop the video goes here
-});

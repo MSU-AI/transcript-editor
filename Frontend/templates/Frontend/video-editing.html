@@ -2,11 +2,27 @@
 
 <html>
   <head>
-    <link rel="icon" type="image/png" href="{% static 'images/Logo-32.png'%}" sizes="32x32" />
-    <link rel="icon" type="image/png" href="{% static 'images/Logo-16.png'%}" sizes="16x16" />
+    <link rel="icon" type="image/png" href="{% static 'images/Logo-32.png' %}" sizes="32x32" />
+    <link rel="icon" type="image/png" href="{% static 'images/Logo-16.png' %}" sizes="16x16" />
 
-    <link rel="stylesheet" href="{% static 'css/video-editing.css'%}">
-    <link rel="stylesheet" href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'%}"/>
+    <link rel="stylesheet" href="{% static 'css/video-editing.css' %}"/>
+    <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'timeline/samples/css/default.css' %}" rel="stylesheet"/>
+    
+    <script src="{% static 'timeline/bower_components/jquery/amalia-dist/jquery.js' %}"></script>
+    <script src="{% static 'timeline/bower_components/jquery-ui/jquery-ui.min.js' %}"></script>        
+    <script src="{% static 'timeline/bower_components/raphael/raphael.js' %}"></script>
+    <!-- style-player -->        
+    <link href="{% static 'timeline/amalia-build/css/amalia.js.min.css' %}" rel="stylesheet"/>
+    <!-- /style-player -->        
+    <!-- script-player -->        
+    <script src="{% static 'timeline/amalia-build/js/amalia.js.min.js' %}"></script>
+    <script src="{% static 'timeline/amalia-build/js/amalia.js.min.js' %}"></script>    
+
+    <script src="{% static 'timeline/amalia-build/js/i18n/amalia.js-message-en.js' %}"></script>
+    <!-- /script-player -->
 
     <title>Transcript-Editing</title>
   </head>
@@ -67,8 +83,7 @@
       </div>
 
       <!-- Video -->
-      <div class="video-container">
-        <div class="video-field">
+
           
         
         <video id="video" controls>
@@ -77,26 +92,31 @@
       </div>
 
         <!-- Timeline -->
-        <div id="timeline">
-          <div class="timeline-container">
-            <div class="timeline-header">
-              Timeline
-            </div>
-            <div class="timeline"></div>
-            <div class="timeline-controls">
-              <!-- <button id="play-button">Play</button>
-              <button id="pause-button">Pause</button>
-              <button id="stop-button">Stop</button> -->
-            </div>
-          </div>
-        </div>
 
+        <div class="video-container">
+            <div class="header">
+                 
+            </div>
+            <div class="content">           
+                <div class="demo">
+                    <div>
+                        <div id="defaultPlayer" ></div>
+                    </div>
+                    <div id="amalia-timeline" ></div>
+                    <script src="{% static 'js/generate-timeline.js' %}"></script>
+                </div>
+            </div>
       </div>
       </div>
       <script src="{% static 'js/upload-video.js' %}"></script>
       <script src="{% static 'js/transcript-generation.js' %}"></script>
       <script src="{% static 'js/transcript-editing.js' %}"></script>
-      
+      <script>       
+          document.addEventListener("DOMContentLoaded", function() {
+              console.log("----------------DOMContentLoaded------------------------")
+          });
+    </script>
+
       
 
       </body>
