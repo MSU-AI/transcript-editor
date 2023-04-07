@@ -34,8 +34,42 @@ function saveTranscript(){
 
 }
 
-function deleteTranscript(){
-    console.log("del transcript element");
+const transcript_del = document.getElementById("transcript");
+
+transcript_del.addEventListener("click", function(event) {
+        // Check if the clicked element is a word (in this case, a span with data-time attribute)
+        if (event.target.tagName === "SPAN" && event.target.hasAttribute("data-time")) {
+            // Toggle the 'selected-word' class on the clicked element
+            event.target.classList.toggle("selected-word");
+        }
+});
+
+function deleteTranscript() {
+    // Get all the selected words
+    let selectedWords = document.querySelectorAll('.selected-word');
+    let selectedWordsArr = Array.from(selectedWords);
+
+    // Find the lines that contain the selected words
+    let linesToDelete = {};
+    selectedWordsArr.forEach(function(word) {
+        let line = word.closest('p').textContent;
+        linesToDelete[line] = true;
+    });
+
+    // Delete the lines that contain the selected words
+    let paragraphs = transcriptArea.querySelectorAll('p');
+    paragraphs.forEach(function(paragraph) {
+        let line = paragraph.textContent;
+        if (linesToDelete[line]) {
+            paragraph.parentNode.removeChild(paragraph);
+        }
+    });
+
+    // Update the transcript HTML with the modified HTML
+    let transcriptContainer = document.querySelector('.transcript-container');
+    let transcriptHTML = transcriptContainer.innerHTML;
+
+    transcriptArea.innerHTML = transcriptHTML;
 }
 
 function downloadTranscript(){
