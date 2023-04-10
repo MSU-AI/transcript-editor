@@ -91,7 +91,7 @@ def upload_file(request):
 
             model = form.save()
 
-            print(model.video.name)
+            print(model.video.path)
 
             # Next, return the ID to the user:
 
@@ -108,11 +108,11 @@ def transcribe(request):
 
         # Grab the file in question:
 
-        video = Video.objects.filter(id=id)
+        video = Video.objects.filter(id=id)[0]
 
         # Now, transcode the file:
 
-        audio = whisper.load_audio(video.video.name)
+        audio = whisper.load_audio(video.video.path)
 
         result = whisper.transcribe(model, audio)
 
@@ -136,7 +136,59 @@ def transcribe(request):
 
             output['timestamps'].append({'text': text, 'start_time': start, 'words': words})
 
-        return JsonResponse(output) # Return a "No Content" response
+        return JsonResponse(output)
 
-        
-    
+
+def get_file(request):
+
+    if request.method == 'POST':
+
+        # Determine the ID:
+
+        id = request.POST['id']
+
+        # Grab the file:
+
+        video = Video.objects.filter(id=id)[0]
+
+        # Return the URL to the file:
+
+        return JsonResponse({'url': video.video.url})
+
+
+def cut_file(request):
+
+    """
+    WORK IN PROGRESS!
+    """
+
+    if request.method == 'POST':
+
+        # Determine the ID:
+
+        id = request.POST['id']
+
+        # Grab the file:
+
+        video = Video.objects.filter(id=id)[0]
+
+
+def delete_file(request):
+
+    if request.method == 'POST':
+
+        # Determine the ID:
+
+        id = request.POST['id']
+
+        # Grab the file:
+
+        video = Video.objects.filter(id=id)[0]
+
+        # Delete the video:
+
+        video.video.delete()
+
+        video.delete()
+
+        return JsonResponse({'deleted': True})

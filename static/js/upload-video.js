@@ -14,7 +14,7 @@ form.addEventListener("click", () =>{
     fileInput.click();
 });
 
-fileInput.onchange = ({target})=>{
+fileInput.onchange = async ({target})=>{
     let file = target.files[0]; //getting file [0] this means if user has selected multiple files then get first one only
     if(file){
         video_size = file.size;
@@ -25,7 +25,24 @@ fileInput.onchange = ({target})=>{
                 let splitName = fileName.split('.');
             fileName = splitName[0].substring(0, 13) + "... ." + splitName[1];
         }
-        uploadFile(file);
+        id = await uploadFile(file);
+
+        console.log("FInal ID");
+        console.log(id);
+
+        // Now, transcribe the video:
+
+        transcribeFile(id);
+
+        // Just for fun, grab download URL:
+
+        var data = new FormData();
+        data.append('id', id);
+
+        var download_url = await makeRequest("/api/get/", data);
+
+        console.log("Download URL:")
+        console.log(download_url);
 
         var reader = new FileReader();
 
@@ -83,9 +100,43 @@ function doneHandler() {
     // load();
 }
 
+async function makeRequest(url, data) {
+    // Makes a generic request to the specified URL
+
+    // Make request to backend:
+
+    const promise = fetch(url, {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": getCookie("csrftoken"),
+            "Accept": "application/json",
+        },
+        body: data,
+    });
+
+    var final_data = await promise.then(res => res.json());
+
+    return final_data;
+}
 
 // file upload function
-function uploadFile(file){
+async function uploadFile(file){
+
+    // Create form data:
+
+    var data = new FormData();
+    data.append('video', file);
+
+    var id = await makeRequest('/uploads/', data)
+
+    return id['video-id'];
+
+}
+
+
+// file transcribe function
+function transcribeFile(id) {
+
     let xhr = new XMLHttpRequest(); //creating new xhr object (AJAX)
 
     // Add event handler to be called when response is collected:
@@ -94,7 +145,7 @@ function uploadFile(file){
 
     // Define bar POST request to uploads
 
-    xhr.open("POST", "/uploads/");
+    xhr.open("POST", "/api/transcribe/");
 
     // Set the CSRF Token and set the content type
 
@@ -104,7 +155,7 @@ function uploadFile(file){
     // Build the form data and add the file
 
     var formData = new FormData();
-    formData.append("video", file);
+    formData.append("id", id);
 
     // Send the data
 
@@ -116,7 +167,7 @@ function uploadFile(file){
 
     // If the upload feild is gone show the loading bar
 
-    if(document.getElementById("wrapper").style.display == "none"){
+    if (document.getElementById("wrapper").style.display == "none") {
 
         let container = document.getElementById("loading-container");
         let fill = document.querySelector(".fill");
@@ -124,31 +175,23 @@ function uploadFile(file){
         console.log(transcript);
 
         container.style.display = "block";
-        
-        let interval = video_size/100000;
-        
+
+        let interval = video_size / 100000;
+
         var bar = 0;
-        var run = setInterval(frames,2);
-        function frames(){
+        var run = setInterval(frames, 2);
+        function frames() {
             bar++;
-            if (fill.style.width.substring(0,3) == "100"){
+            if (fill.style.width.substring(0, 3) == "100") {
                 clearInterval(run);
                 container.style.display = "none";
-            }else{
-                fill.style.width = bar/interval + "%";
+            } else {
+                fill.style.width = bar / interval + "%";
             }
 
-            if (document.querySelector(".transcript-container").innerHTML != transcript){
+            if (document.querySelector(".transcript-container").innerHTML != transcript) {
                 fill.style.width = "100%";
             }
         }
-        
-        
-        
-
-    } 
-
-
+    }
 }
-
-
