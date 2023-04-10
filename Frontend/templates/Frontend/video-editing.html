@@ -32,7 +32,7 @@
       <header>Upload A Video File</header>
       <form action="/uploads/" method ="POST" enctype = "multipart/form-data">
          {% csrf_token %} 
-        <input class="file-input" type="file" name="file" hidden>
+        <input class="file-input" type="file" name="video" id="id_video" hidden>
         <i class="fas fa-cloud-upload-alt"></i>
         <p>Browse File to Upload</p>
       </form>
