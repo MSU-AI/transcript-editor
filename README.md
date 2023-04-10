@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="static/images/Extended-logo.png">
+</p>
+
 # Video Editing Web Application
 
 This web application is designed to make video editing easy and intuitive. It uses a combination of front-end and back-end technologies to provide users with a powerful tool that allows them to edit their videos quickly and efficiently.
