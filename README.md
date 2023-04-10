@@ -1,2 +1,25 @@
 # transcript-editor
-Repo for the Transcript Editor team
+
+Why this project?
+
+
+Technologies Used
+
+
+User Interface
+
+
+Transcript Generation
+
+
+Timeline Generation
+
+
+Video Editing
+
+
+Backend Engineering and File Handling
+
+
+
+
