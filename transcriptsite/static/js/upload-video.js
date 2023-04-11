@@ -87,7 +87,7 @@ function uploadFile(file){
   // Build the form data and add the file
 
   var formData = new FormData();
-  formData.append("file", file);
+  formData.append("video", file);
 
   // Send the data
 
