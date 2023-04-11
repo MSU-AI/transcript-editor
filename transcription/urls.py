@@ -13,5 +13,6 @@ urlpatterns = [
     path('api/upload/', views.upload_file, name='upload'),
     path('api/get/', views.get_file, name='get_file'),
     path('api/cut/', views.cut_file, name='cut_file'),
+    path('api/cuts/', views.cut_files, name='cut_files'),
     path('api/delete/', views.delete_file, name='delete_file'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
