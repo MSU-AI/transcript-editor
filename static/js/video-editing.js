@@ -29,10 +29,9 @@ async function cutVideo(id, timestamps){
 
     var data = new FormData();
     data.append('id', id);
-    data.append('start', timestampList[0][0]);
-    data.append('stop', timestampList[0][1]);
-
-    var new_id = await makeRequest("/api/cut/", data);
+    data.append('cuts', timestampJson);
+    
+    var new_id = await makeRequest("/api/cuts/", data);
     
     download_url = await getVideo(new_id["id"]);
     console.log("New ID");

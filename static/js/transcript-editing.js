@@ -5,6 +5,7 @@
     let edit_button = document.getElementById("edit-transcript");
     let save_button = document.getElementById("save-transcript");
     let delete_button = document.getElementById("delete-transcript");
+    let timestamps = {"timestamps": []};
 
 // This function is called when the user clicks the edit button
 
@@ -19,6 +20,8 @@ function editTranscript(){
     save_button.style.display = "inline";
     delete_button.style.display = "inline";
 
+    
+
 }
 
 function saveTranscript(){
@@ -29,6 +32,8 @@ function saveTranscript(){
     edit_button.style.display = "inline";
     save_button.style.display = "none";
     delete_button.style.display = "none";
+
+    cutVideo(id, timestamps);
     
     
 
@@ -79,21 +84,21 @@ function deleteTranscript() {
     // Get all the selected words
     let selectedWords = document.querySelectorAll('.selected-word');
     let selectedWordsArr = Array.from(selectedWords);
-    let timestamps = [];
+    
     
     if (selectedWordsArr.length > 0){
     // if any word has been selected, then update the video
         selectedWordsArr.forEach(element => {
             console.log(element);
-            timestamps.push([element.getAttribute("data-start"), element.getAttribute("data-stop")]);
+            timestamps["timestamps"].push([element.getAttribute("data-start"), element.getAttribute("data-stop")]);
             element.remove();
         });
 
-        timestamps = {"timestamps":timestamps};
+        
 
         console.log("----timestamps-----");
         console.log(timestamps);
-        cutVideo(id, timestamps);
+        
     }
     //selectedWordsArr.forEach(span => span.remove());
 
