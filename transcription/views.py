@@ -186,20 +186,19 @@ def cut_files(request):
 
         clip = moviepy.editor.VideoFileClip(video.video.path)
 
+        total_removed = 0
+
         # Iterate over each cut:
 
         for cut in cuts['timestamps']:
 
-            duration = clip.duration
+            clip = clip.cutout(cut[0] - total_removed, cut[1] - total_removed)
 
-            first_clip = clip.subclip(0, cut[0])
-            second_clip = clip.subclip(cut[1], duration)
-
-            final_clip = moviepy.editor.concatenate_videoclips([first_clip, second_clip])
+            total_removed += cut[1] - cut[0]
 
         # Save video to memory:
 
-        final_clip.write_videofile(nvideo.video.path)
+        clip.write_videofile(nvideo.video.path)
 
         return JsonResponse({'id': nvideo.id})
 
