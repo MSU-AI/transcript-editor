@@ -1,9 +1,14 @@
+import uuid
+
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
+from django.core.files.base import ContentFile
 from .forms import UploadVideoForm
 from .models import Video
 
 import whisper_timestamped as whisper
+import moviepy.editor
+
 
 # Load a model:
 
@@ -158,10 +163,6 @@ def get_file(request):
 
 def cut_file(request):
 
-    """
-    WORK IN PROGRESS!
-    """
-
     if request.method == 'POST':
 
         # Determine the ID:
@@ -171,6 +172,34 @@ def cut_file(request):
         # Grab the file:
 
         video = Video.objects.filter(id=id)[0]
+
+        # Get the start and stop time:        
+
+        first_time = float(request.POST['start'])
+        second_time = float(request.POST['stop'])
+
+        # Create video model and blank file:
+
+        nvideo = Video()
+        nvideo.video.save(str(uuid.uuid4()) + '.mp4', ContentFile(''))
+        nvideo.save()
+
+        # Create and clip the video:
+
+        clip = moviepy.editor.VideoFileClip(video.video.path)
+
+        duration = clip.duration
+
+        first_clip = clip.subclip(0, first_time)
+        second_clip = clip.subclip(second_time, duration)
+
+        final_clip = moviepy.editor.concatenate_videoclips([first_clip, second_clip])
+
+        # Path to cut video:
+
+        final_clip.write_videofile(nvideo.video.path)
+
+        return JsonResponse({'id': nvideo.id})
 
 
 def delete_file(request):
