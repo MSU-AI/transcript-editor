@@ -29,15 +29,15 @@ function saveTranscript(){
     edit_button.style.display = "inline";
     save_button.style.display = "none";
     delete_button.style.display = "none";
-
-
+    
+    
 
 }
 
 const transcript_del = document.getElementById("transcript");
 
 transcript_del.addEventListener("mousedown", function(event) {
-    if (event.target.tagName === "SPAN" && event.target.hasAttribute("data-time")) {
+    if (event.target.tagName === "SPAN" && event.target.hasAttribute("data-start")) {
 
         // Set a flag on the document object to indicate that text is being selected
         document.isTextSelected = true;
@@ -46,7 +46,7 @@ transcript_del.addEventListener("mousedown", function(event) {
         event.target.classList.toggle("selected-word");
 
         // Check if all words in the paragraph are selected
-        const allWordsSelected = Array.from(event.target.parentNode.querySelectorAll("span[data-time]"))
+        const allWordsSelected = Array.from(event.target.parentNode.querySelectorAll("span[data-start]"))
             .every(span => span.classList.contains("selected-word"));
 
         // Toggle the 'selected-paragraph' class on the paragraph element if all words are selected
@@ -55,13 +55,13 @@ transcript_del.addEventListener("mousedown", function(event) {
 });
 
 document.addEventListener("mousemove", function(event) {
-    if (document.isTextSelected && event.target.tagName === "SPAN" && event.target.hasAttribute("data-time")) {
+    if (document.isTextSelected && event.target.tagName === "SPAN" && event.target.hasAttribute("data-start")) {
 
         // Toggle the 'selected-word' class on the hovered element
         event.target.classList.toggle("selected-word", true);
 
         // Check if all words in the paragraph are selected
-        const allWordsSelected = Array.from(event.target.parentNode.querySelectorAll("span[data-time]"))
+        const allWordsSelected = Array.from(event.target.parentNode.querySelectorAll("span[data-start]"))
             .every(span => span.classList.contains("selected-word"));
 
         // Toggle the 'selected-paragraph' class on the paragraph element if all words are selected
@@ -69,7 +69,7 @@ document.addEventListener("mousemove", function(event) {
     }
 });
 
-document.addEventListener("mouseup", function(event) {
+document.addEventListener("mouseup", function() {
     // Reset the flag on the document object
     document.isTextSelected = false;
 });
@@ -79,8 +79,23 @@ function deleteTranscript() {
     // Get all the selected words
     let selectedWords = document.querySelectorAll('.selected-word');
     let selectedWordsArr = Array.from(selectedWords);
+    let timestamps = [];
     
-    selectedWordsArr.forEach(span => span.remove());
+    if (selectedWordsArr.length > 0){
+    // if any word has been selected, then update the video
+        selectedWordsArr.forEach(element => {
+            console.log(element);
+            timestamps.push([element.getAttribute("data-start"), element.getAttribute("data-stop")]);
+            element.remove();
+        });
+
+        timestamps = {"timestamps":timestamps};
+
+        console.log("----timestamps-----");
+        console.log(timestamps);
+        cutVideo(id, timestamps);
+    }
+    //selectedWordsArr.forEach(span => span.remove());
 
     // Update the transcript HTML with the modified HTMLi
     document.addEventListener('DOMContentLoaded', () => {
@@ -93,10 +108,7 @@ function deleteTranscript() {
 }
 
 function downloadTranscript(){
-    console.log("downloading transcript");
-
-    // var link = document.createElement("a");
-    // link.download = name;
-    // link.href = uri;
-    // link.click();
+    console.log("downloading transcript"); 
 }
+
+

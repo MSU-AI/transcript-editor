@@ -43,6 +43,7 @@ fileInput.onchange = async ({target})=>{
 
         console.log("Download URL:")
         console.log(download_url);
+        console.log(download_url["url"]);
 
         var reader = new FileReader();
 
@@ -119,6 +120,24 @@ async function makeRequest(url, data) {
     return final_data;
 }
 
+async function cutVideo(id, timestamps){
+    let timestampJson = JSON.stringify(timestamps);
+    let timestampList = timestamps["timestamps"];
+
+    console.log(timestampList);
+
+    var data = new FormData();
+    data.append('id', id);
+    data.append('start', timestampList[0][0]);
+    data.append('stop', timestampList[0][1]);
+
+    var new_id = await makeRequest("/api/cut/", data)
+
+    console.log("New ID");
+    console.log(new_id);
+
+}
+
 // file upload function
 async function uploadFile(file){
 
@@ -174,7 +193,19 @@ function transcribeFile(id) {
         let transcript = document.querySelector(".transcript-container").innerHTML;
         console.log(transcript);
 
-        container.style.display = "block";
+        container.style.display = "flex";
+        console.log(container.style.display);
+
+        const messages = ['Loading Transcript...', 'Loading Timeline...', 'Loading Workspace...'];
+        let currentMessageIndex = 0;
+        const pElement = container.querySelector('p');
+
+        function updateMessage() {
+            pElement.textContent = messages[currentMessageIndex];
+            currentMessageIndex = (currentMessageIndex + 1) % messages.length;
+        }
+
+        setInterval(updateMessage, 8000); 
 
         let interval = video_size / 100000;
 

@@ -24,55 +24,6 @@ def index2(request):
     return render(request, 'Frontend/video-editing.html')
 
 
-def upload_filet(request):
-
-    if request.method == 'POST':
-
-        print("In post")
-        print(request)
-        print(request.FILES)
-
-        form = UploadVideoForm(request.POST, request.FILES)
-
-        if form.is_valid():
-
-            print("File is valid")
-
-            filename, file = handle_uploaded_file(request.FILES["file"])
-
-            # Now, transcode the file:
-
-            audio = whisper.load_audio("uploads/" + filename)
-
-            result = whisper.transcribe(model, audio)
-
-            output = {"timestamps": []}
-
-            for seg in result['segments']:
-
-                # Determine the text spoken:
-
-                text = seg['text']
-
-                # Determine the time this segment started at:
-
-                start = seg['start']
-
-                # Next, get the words:
-
-                words = seg['words']
-
-                # Save the data to a final dictionary:
-
-                output['timestamps'].append({'text': text, 'start_time': start, 'words': words})
-
-                # Finally, delete the file:
-
-                file.delete(filename)
-
-        return JsonResponse(output) # Return a "No Content" response
-
-
 def upload_file(request):
 
     if request.method == 'POST':
@@ -179,6 +130,9 @@ def cut_file(request):
         first_time = float(request.POST['start'])
         second_time = float(request.POST['stop'])
 
+        print("First time: {}".format(first_time))
+        print("Second time: {}".format(second_time))
+
         # Create video model and blank file:
 
         nvideo = Video()
@@ -189,16 +143,19 @@ def cut_file(request):
 
         clip = moviepy.editor.VideoFileClip(video.video.path)
 
-        duration = clip.duration
+        # Cut the segment out of the clip:
 
-        first_clip = clip.subclip(0, first_time)
-        second_clip = clip.subclip(second_time, duration)
-
-        final_clip = moviepy.editor.concatenate_videoclips([first_clip, second_clip])
+        nclip = clip.cutout(first_time, second_time)
 
         # Path to cut video:
 
-        final_clip.write_videofile(nvideo.video.path)
+        nclip.write_videofile(nvideo.video.path)
+
+        print(nclip.duration)
+        print(clip.duration)
+
+        clip.close()
+        nclip.close()
 
         return JsonResponse({'id': nvideo.id})
 
