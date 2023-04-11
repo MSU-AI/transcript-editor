@@ -1,4 +1,5 @@
 import uuid
+import json
 
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
@@ -173,7 +174,7 @@ def cut_file(request):
 
         video = Video.objects.filter(id=id)[0]
 
-        # Get the start and stop time:        
+        # Get the start and stop time:
 
         first_time = float(request.POST['start'])
         second_time = float(request.POST['stop'])
@@ -196,6 +197,50 @@ def cut_file(request):
         final_clip = moviepy.editor.concatenate_videoclips([first_clip, second_clip])
 
         # Path to cut video:
+
+        final_clip.write_videofile(nvideo.video.path)
+
+        return JsonResponse({'id': nvideo.id})
+
+
+def cut_files(request):
+
+    if request.method == 'POST':
+
+        # Determine the ID:
+
+        id = request.POST['id']
+
+        # Grab the file:
+
+        video = Video.objects.filter(id=id)[0]
+
+        # Decode the cuts:
+
+        cuts = json.loads(request.POST['cuts'])
+
+        # Create video model and blank file:
+
+        nvideo = Video()
+        nvideo.video.save(str(uuid.uuid4()) + '.mp4', ContentFile(''))
+        nvideo.save()
+
+        # Load the video:
+
+        clip = moviepy.editor.VideoFileClip(video.video.path)
+
+        # Iterate over each cut:
+
+        for cut in cuts['timestamps']:
+
+            duration = clip.duration
+
+            first_clip = clip.subclip(0, cut[0])
+            second_clip = clip.subclip(cut[1], duration)
+
+            final_clip = moviepy.editor.concatenate_videoclips([first_clip, second_clip])
+
+        # Save video to memory:
 
         final_clip.write_videofile(nvideo.video.path)
 
