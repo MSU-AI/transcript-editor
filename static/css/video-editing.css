@@ -175,16 +175,21 @@ nav ul li a{
 
 
 
-#loading-container{
-  width: 70%;
-  padding: 50px 0;
+#loading-container {
+  width: 100%;
+  height: 100%;
   background: #1d2026;
-  box-shadow: 0 0 30px rgba(0,0,0, 0.8);
   border-radius: 5px;
   text-align: center;
   z-index: 1;
   display: none;
-  
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#loading-container p{
+    color: white;
 }
 
 .bar {
@@ -213,8 +218,25 @@ nav ul li a{
   background-color: #1d2026;
 }
 
-#editor-container p {
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+#editor-container p{
+    color: white;
+}
+
+#loading-container p {
   color: white;
+  animation: fadeInOut 8s infinite;
 }
 
 #save-transcript{

@@ -174,7 +174,19 @@ function transcribeFile(id) {
         let transcript = document.querySelector(".transcript-container").innerHTML;
         console.log(transcript);
 
-        container.style.display = "block";
+        container.style.display = "flex";
+        console.log(container.style.display);
+
+        const messages = ['Loading Transcript...', 'Loading Timeline...', 'Loading Workspace...'];
+        let currentMessageIndex = 0;
+        const pElement = container.querySelector('p');
+
+        function updateMessage() {
+            pElement.textContent = messages[currentMessageIndex];
+            currentMessageIndex = (currentMessageIndex + 1) % messages.length;
+        }
+
+        setInterval(updateMessage, 8000); 
 
         let interval = video_size / 100000;
 
