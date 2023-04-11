@@ -1,4 +1,4 @@
-console.log("start of video-editing.js");
+console.log("start of transcript-generation.js");
 
 
 let transcriptArea = document.getElementById("transcript");
@@ -41,11 +41,11 @@ function processData(data) {
                 //new paragraph
                 paragraph = '<p>';
                 line = word;
-                paragraph += `<span data-time=${words['start']}> ${word}</span>`;
+                paragraph += `<span data-start=${words['start']} data-stop=${words['end']}> ${word}</span>`;
 
             } else {
                 line += ` ${word}`;
-                paragraph += `<span data-time=${words['start']}> ${word}</span>`;
+                paragraph += `<span data-start=${words['start']} data-stop=${words['end']}> ${word}</span>`;
             }
 
             if (j == data[i]["words"].length-1 && i == data.length-1){
@@ -69,7 +69,7 @@ function processData(data) {
     var words = transcriptArea.getElementsByTagName("span");
     for (var i = 0; i < words.length; i++) {
         var word = words[i];
-        var time = word.getAttribute("data-time");
+        var time = word.getAttribute("data-start");
 
         word.addEventListener("click", (function(time) {
             return function() {
