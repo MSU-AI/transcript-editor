@@ -106,23 +106,6 @@ async function makeRequest(url, data) {
     return final_data;
 }
 
-async function cutVideo(id, timestamps){
-    let timestampJson = JSON.stringify(timestamps);
-    let timestampList = timestamps["timestamps"];
-
-    console.log(timestampList);
-
-    var data = new FormData();
-    data.append('id', id);
-    data.append('start', timestampList[0][0]);
-    data.append('stop', timestampList[0][1]);
-
-    var new_id = await makeRequest("/api/cut/", data)
-
-    console.log("New ID");
-    console.log(new_id);
-
-}
 
 // file upload function
 async function uploadFile(file){

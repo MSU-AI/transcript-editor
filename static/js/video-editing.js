@@ -26,6 +26,7 @@ async function cutVideo(id, timestamps){
     let timestampList = timestamps["timestamps"];
 
     console.log(timestampList);
+    console.log(id);
 
     var data = new FormData();
     data.append('id', id);
