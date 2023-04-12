@@ -16,7 +16,7 @@ The user interface of the application is built using HTML, CSS, and JavaScript. 
 
 ## Transcription
 
-The transcription subsystem is powered by Open AI's Whisper model. When a user uploads a video, the system automatically transcribes the audio and displays it on the website. The interactive transcript makes it easy for users to navigate through their video and find specific parts of the audio.
+We initially wanted to use Amazon Transcribe for the transcription, but Amazon charged for usage of the service. The transcription subsystem is powered by Open AI's Whisper model. Specifically, a fork of Whisper that tracks the time of each word in the video. When a user uploads a video, the system automatically transcribes the audio and displays it on the website. The interactive transcript makes it easy for users to navigate through their video and find specific parts of the audio.
 
 ## Video Timeline
 
@@ -24,7 +24,7 @@ Originally, we planned to use a JavaScript library called amalia.js for the vide
 
 ## Video Editing
 
-The video editing process is handled by the backend using Python's MoviePy library. Users can delete specific words in the transcript to remove portions of the video they don't want to include. This process is simple and intuitive, allowing users to make edits quickly and easily.
+The video editing process is handled by the backend using Python's MoviePy library. Users can delete specific words in the transcript to remove portions of the video they don't want to include. The process recombines the video parts that weren't deleting, creating a new video. This process is simple and intuitive, allowing users to make edits quickly and easily. 
 
 ## Technologies Used
 
