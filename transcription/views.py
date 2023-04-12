@@ -10,10 +10,65 @@ from .models import Video
 import whisper_timestamped as whisper
 import moviepy.editor
 
+SMALL = 0.1  # Number of seconds for two cuts to count as one
 
 # Load a model:
 
 model = whisper.load_model("base")
+
+
+def merge_times(times):
+    """
+    Merges a list of times.
+
+    The idea is to convert two cuts with a small
+    time diff into one cut to avoid awkward cuts.
+
+    :param times: List of times
+    :type times: List[Tuple(int, int)]
+    """
+
+    final = []
+    last = [0, 0]
+    index = -1
+
+    # Iterate over all times:
+
+    while index < len(times) - 1:
+
+        # Determine if we need to merge
+
+        if times[index+1][0] - last[1] < SMALL:
+
+            # Set last:
+
+            last = [last[0], times[index+1][1]]
+
+        # Otherwise, just set last:
+
+        else:
+
+            # Determine if we should add to final:
+
+            if last[0] != last[1]:
+
+                # Add value to final:
+
+                final.append(last)
+
+            # Set last:
+
+            last = times[index+1]
+
+        # Increment index:
+
+        index += 1
+
+    # Finally, add last to list:
+
+    final.append(last)
+
+    return final
 
 
 def index(request):
@@ -174,7 +229,19 @@ def cut_files(request):
 
         # Decode the cuts:
 
-        cuts = json.loads(request.POST['cuts'])
+        cuts = json.loads(request.POST['cuts'])['timestamps']
+
+        # Sort by start value:
+
+        cuts.sort(key=lambda x: x[0])
+
+        print("Original Cut: {}".format(cuts))
+
+        if len(cuts) >= 2:
+
+            cuts = merge_times(cuts)
+
+        print(cuts)
 
         # Create video model and blank file:
 
@@ -190,8 +257,8 @@ def cut_files(request):
 
         # Iterate over each cut:
 
-        for cut in cuts['timestamps']:
-            cut = [eval(i) for i in cut]
+        for cut in cuts:
+
             print(f"Current timestamp: {cut}")
 
             clip = clip.cutout(cut[0] - total_removed, cut[1] - total_removed)

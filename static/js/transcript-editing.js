@@ -88,7 +88,7 @@ function deleteTranscript() {
     // if any word has been selected, then update the video
         selectedWordsArr.forEach(element => {
             console.log(element);
-            timestamps["timestamps"].push([element.getAttribute("data-start"), element.getAttribute("data-stop")]);
+            timestamps["timestamps"].push([parseFloat(element.getAttribute("data-start")), parseFloat(element.getAttribute("data-stop"))]);
             element.remove();
         });
 
