@@ -24,7 +24,7 @@ function editTranscript(){
 
 }
 
-function saveTranscript(){
+async function saveTranscript(){
     console.log("saving transcript");
 
     transcript_container.classList.replace('transcript-container-editing','transcript-container');
@@ -33,9 +33,7 @@ function saveTranscript(){
     save_button.style.display = "none";
     delete_button.style.display = "none";
 
-    cutVideo(id, timestamps);
-    
-    
+    cutVideo(id, timestamps);    
 
 }
 
