@@ -8,22 +8,6 @@
     <link rel="stylesheet" href="{% static 'css/video-editing.css' %}"/>
     <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'/>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{% static 'timeline/samples/css/default.css' %}" rel="stylesheet"/>
-    
-    <script src="{% static 'timeline/bower_components/jquery/amalia-dist/jquery.js' %}"></script>
-    <script src="{% static 'timeline/bower_components/jquery-ui/jquery-ui.min.js' %}"></script>        
-    <script src="{% static 'timeline/bower_components/raphael/raphael.js' %}"></script>
-    <!-- style-player -->        
-    <link href="{% static 'timeline/amalia-build/css/amalia.js.min.css' %}" rel="stylesheet"/>
-    <!-- /style-player -->        
-    <!-- script-player -->        
-    <script src="{% static 'timeline/amalia-build/js/amalia.js.min.js' %}"></script>
-    <script src="{% static 'timeline/amalia-build/js/amalia.js.min.js' %}"></script>    
-
-    <script src="{% static 'timeline/amalia-build/js/i18n/amalia.js-message-en.js' %}"></script>
-    <!-- /script-player -->
-
     <title>Transcript-Editing</title>
   </head>
   <body>
@@ -47,7 +31,6 @@
       <p>Loading your workspace...</p>
     </div>
 
-    <button onclick="upload()">upload</button>
 
     <!-- Transcript Container -->
     <div id="editor-container">
@@ -86,34 +69,24 @@
       <!-- Video -->
 
           
-       <!-- 
-        <video id="video" controls>
-          <source id="source" type="video/mp4">
-        </video>
-      </div>
-        -->
+      <div class="video-container">
 
-        <!-- Timeline -->
+          <video id="video" controls>
+              <source id="source" type="video/mp4">
+          </video>
 
-        <div class="video-container">
-            <div class="header">
-                 
-            </div>
-            <div class="content">           
-                <div class="demo">
-                    <div>
-                        <div id="defaultPlayer" ></div>
-                    </div>
-                    <div id="amalia-timeline" ></div>
-                    <script src="{% static 'js/generate-timeline.js' %}"></script>
-                </div>
-            </div>
-      </div>
-      </div>
+          <div id="timeline">
+              <div id="screenshotContainer">
+                  <div id="bar"></div>
+              </div>
+          </div>
+
+      </div> 
       <script src="{% static 'js/upload-video.js' %}"></script>
       <script src="{% static 'js/transcript-generation.js' %}"></script>
       <script src="{% static 'js/transcript-editing.js' %}"></script>
       <script src="{% static 'js/video-editing.js' %}"></script>
+      <script src="{% static 'js/generate-timeline.js' %}"></script>
       <script>       
           document.addEventListener("DOMContentLoaded", function() {
               console.log("----------------DOMContentLoaded------------------------")

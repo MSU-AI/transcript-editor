@@ -73,11 +73,11 @@ function processData(data) {
 
         word.addEventListener("click", (function(time) {
             return function() {
-                let mediaPlayer = $("#defaultPlayer").data('fr.ina.amalia.player').getPlayer();;
+                let video = document.getElementById("video");
 
                 // Set the media player's current time to the time attribute
-                mediaPlayer.seek(time);
-                mediaPlayer.play(); 
+                video.currentTime = time;
+                video.play(); 
             }
         })(time));
     }

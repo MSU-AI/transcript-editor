@@ -48,29 +48,15 @@ fileInput.onchange = async ({target})=>{
         var reader = new FileReader();
 
         reader.onload = function(e){
-            
+
             var src = e.target.result;
-            /*
-            let mediaPlayer = $("#defaultPlayer").mediaPlayer();
-            mediaPlayer[0].src = src;
-
-            // Show the mediaPlayer
-            console.log("showing mediaPlayer")
-            mediaPlayer.show();
-            
-
-            
             var video = document.getElementById("video");
             var source = document.getElementById("source")
 
             source.setAttribute("src", src);
             video.load();
-            */
-            // Calls the function that generates the timeline for the video  
-            generateTimeline(src);  
-
-        }
-
+            generateTimeline();
+        } 
         reader.readAsDataURL(file)
     }
 

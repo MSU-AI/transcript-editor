@@ -34,6 +34,15 @@ async function cutVideo(id, timestamps){
     var new_id = await makeRequest("/api/cuts/", data);
     
     download_url = await getVideo(new_id["id"]);
+    let url = download_url["url"];
+
+    video = document.getElementById("video");
+    source = document.getElementById("source");
+
+    source.setAttribute("src", url);
+    video.load();
+    console.log(source);
+
     console.log("New ID");
     console.log(new_id);
 
