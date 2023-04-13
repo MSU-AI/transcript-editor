@@ -397,8 +397,8 @@ nav ul li a{
     white-space: nowrap;
 }
 .screenshot {
-    width: 150px;
-    height: 84px;
+    width: 160px;
+    height: 90px;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -411,6 +411,37 @@ nav ul li a{
     width: 10px;
     height: 100%;
     background-color: white;
-    cursor: pointer;
+    cursor: pointer; 
 }
 
+#timeline button{
+    font-size: 16px;
+    background-color: #00986f;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 8px 8px;
+    padding-bottom: 10px;
+
+}
+
+#timeline-controls {
+    display: flex;
+    flex-direction: column; 
+    padding: 10px 8px 10px 5px;;
+}
+
+#cut{
+    margin-bottom: 5px; /* add margin below the first button */
+}
+
+#start{
+    display: none;
+    margin-bottom: 5px; /* add margin below the first button */
+}
+
+#end{
+    display: none;
+    margin-top: 5px;
+}

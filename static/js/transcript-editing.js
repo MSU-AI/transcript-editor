@@ -32,9 +32,10 @@ async function saveTranscript(){
     edit_button.style.display = "inline";
     save_button.style.display = "none";
     delete_button.style.display = "none";
-
-    cutVideo(id, timestamps);    
-
+    
+    if (timestamps["timestamps"].length > 0){
+        cutVideo(id, timestamps);    
+    }
 }
 
 const transcript_del = document.getElementById("transcript");

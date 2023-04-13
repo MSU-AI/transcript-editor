@@ -1,3 +1,9 @@
+let cutButton = document.getElementById("cut");
+let startButton = document.getElementById("start"); 
+let endButton = document.getElementById("end");
+let timelineTimestamps = {"timestamps": []};
+
+
 // This function generates the timeline
 function generateTimeline() {
     const video = document.querySelector('#video');
@@ -67,3 +73,21 @@ function generateTimeline() {
     }); 
 }
 
+function cuttingMode(){
+    
+    cutButton.style.display = "none";
+    startButton.style.display = "flex";
+    endButton.style.display = "flex";
+}
+
+function startCut(){
+    console.log(timelineTimestamps["timestamps"]);
+    timelineTimestamps["timestamps"] = [];
+    timelineTimestamps["timestamps"].push([video.currentTime.toString()]);
+}
+
+function endCut(){
+
+    timelineTimestamps["timestamps"][0].push(video.currentTime.toString());
+    cutVideo(id, timelineTimestamps);
+}
