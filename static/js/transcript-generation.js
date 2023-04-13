@@ -5,18 +5,19 @@ let transcriptArea = document.getElementById("transcript");
 let transcriptHTML = ` `;
 
 function load(){
-fetch('/static/assets/output.json')
-  .then(response => response.json())
-  .then(data => {
-    console.log("Data from output.json");
-    // console.log(data);
-    // Use the data object here
-    processData(data);
-  });
+    console.trace()
+    fetch('/static/assets/output.json')
+        .then(response => response.json())
+        .then(data => {
+            console.log("Data from output.json");
+            // console.log(data);
+            // Use the data object here
+            processData(data);
+        });
 }
 
-function processData(data) {
-
+function processData(data) { 
+    transcriptArea.innerHTML = "";
     line = '';
     paragraph = `<p>`;
     console.log(data["timestamps"]);

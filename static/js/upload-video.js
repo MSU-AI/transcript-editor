@@ -162,6 +162,7 @@ function transcribeFile(id) {
         let transcript = document.querySelector(".transcript-container").innerHTML;
         console.log(transcript);
 
+ if (document.querySelector(".transcript-container").innerHTML != transcript) {
         container.style.display = "flex";
         console.log(container.style.display);
 
@@ -177,6 +178,7 @@ function transcribeFile(id) {
         setInterval(updateMessage, 8000); 
 
         let interval = video_size / 100000;
+        fill.style.width = 0;
 
         var bar = 0;
         var run = setInterval(frames, 2);
@@ -187,10 +189,6 @@ function transcribeFile(id) {
                 container.style.display = "none";
             } else {
                 fill.style.width = bar / interval + "%";
-            }
-
-            if (document.querySelector(".transcript-container").innerHTML != transcript) {
-                fill.style.width = "100%";
             }
         }
     }

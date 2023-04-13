@@ -1,11 +1,12 @@
 // Grab each element by id in order to change the id name.
-    
-    let transcript_container = document.querySelector(".transcript-container");  
-    let transcript = document.getElementById("transcript");
-    let edit_button = document.getElementById("edit-transcript");
-    let save_button = document.getElementById("save-transcript");
-    let delete_button = document.getElementById("delete-transcript");
-    let timestamps = {"timestamps": []};
+
+let transcript_container = document.querySelector(".transcript-container");  
+let transcript = document.getElementById("transcript");
+let edit_button = document.getElementById("edit-transcript");
+let save_button = document.getElementById("save-transcript");
+let delete_button = document.getElementById("delete-transcript");
+let download_button = document.getElementById("download-transcript");   
+let timestamps = {"timestamps": []};
 
 // This function is called when the user clicks the edit button
 
@@ -19,6 +20,7 @@ function editTranscript(){
     edit_button.style.display = "none";
     save_button.style.display = "inline";
     delete_button.style.display = "inline";
+    download_button.style.display = "none"
 
     
 
@@ -32,6 +34,7 @@ async function saveTranscript(){
     edit_button.style.display = "inline";
     save_button.style.display = "none";
     delete_button.style.display = "none";
+    download_button.style.display = "inline";
     
     if (timestamps["timestamps"].length > 0){
         cutVideo(id, timestamps);    
