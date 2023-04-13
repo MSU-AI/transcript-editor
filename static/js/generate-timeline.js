@@ -91,7 +91,9 @@ function startCut(){
 }
 
 function endCut(){
+
     console.log(video.currentTime);
+
     timelineTimestamps["timestamps"][0].push(video.currentTime);
     cutVideo(id, timelineTimestamps);
 
