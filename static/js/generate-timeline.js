@@ -7,6 +7,7 @@ let videoEnded = false;
 
 // This function generates the timeline
 function generateTimeline() {
+    videoEnded = false;
     const video = document.querySelector('#video');
     
     console.log(`%c Current Video: ${video.innerHTML}`, `color: red`);
@@ -50,6 +51,13 @@ function generateTimeline() {
         video.currentTime = 0;
         videoEnded = true;
         video.removeEventListener('play', generateTimeline);
+        video.removeEventListener('timeupdate', generateTimeline);
+    });
+
+     video.addEventListener('timeupdate', () => {
+        const progress = video.currentTime / video.duration;
+        const position = progress * screenshotContainer.clientWidth;
+        bar.style.left = `${position}px`;
     });
 
     bar.addEventListener('mousedown', (e) => {
