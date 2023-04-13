@@ -21,14 +21,17 @@ body{
   color: #fff;
   background: #1d2026;
 }
+.fill{
+    width: 0;
+}
 #wrapper{
-  width: 50%;
+  min-width: 50%;
+  min-height: 70%;
   background: #454c5a;
   border-radius: 5px;
   padding: 30px;
   box-shadow: 7px 7px 12px rgba(0,0,0,0.05);
   z-index: 9;
- 
 }
 #wrapper header{
   color: #adc3fa;
@@ -37,7 +40,7 @@ body{
   text-align: center;
 }
 #wrapper form{
-  height: 50%;
+  min-height: 50%;
   display: flex;
   cursor: pointer;
   margin: 30px 0;
