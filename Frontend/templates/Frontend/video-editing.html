@@ -74,19 +74,20 @@
 
           <video id="video" controls>
               <source id="source" type="video/mp4">
-          </video> 
-      </div> 
-      <div id="timeline">
-          <div id="timeline-controls">
-              <button id="cut" onclick="cuttingMode()">cut</button>
-              <button id="start" onclick="startCut()">start</button>
-              <button id="end" onclick="endCut()">end</button>
-          </div> 
-          <div id="screenshotContainer">
-              <div id="bar"></div>
-          </div>
-      </div>
+          </video>
 
+          <div id="timeline">
+              <div id="timeline-controls">
+                <button id="cut" onclick="cuttingMode()">cut</button>
+                <button id="start" onclick="startCut()">start</button>
+                <button id="end" onclick="endCut()">end</button>
+              </div> 
+              <div id="screenshotContainer">
+                  <div id="bar"></div>
+              </div>
+          </div>
+
+      </div> 
       <script src="{% static 'js/upload-video.js' %}"></script>
       <script src="{% static 'js/transcript-generation.js' %}"></script>
       <script src="{% static 'js/transcript-editing.js' %}"></script>
@@ -96,8 +97,8 @@
           document.addEventListener("DOMContentLoaded", function() {
               console.log("----------------DOMContentLoaded------------------------")
           });
-      </script>
+    </script>
 
+      
 
-
-  </body>
+      </body>
