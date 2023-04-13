@@ -87,12 +87,12 @@ function cuttingMode(){
 function startCut(){
     console.log(timelineTimestamps["timestamps"]);
     timelineTimestamps["timestamps"] = [];
-    timelineTimestamps["timestamps"].push([video.currentTime.toString()]);
+    timelineTimestamps["timestamps"].push([video.currentTime]);
 }
 
 function endCut(){
 
-    timelineTimestamps["timestamps"][0].push(video.currentTime.toString());
+    timelineTimestamps["timestamps"][0].push(video.currentTime);
     cutVideo(id, timelineTimestamps);
 
     cutButton.style.display = "flex";
