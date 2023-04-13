@@ -156,13 +156,14 @@ function transcribeFile(id) {
     // If the upload feild is gone show the loading bar
 
     if (document.getElementById("wrapper").style.display == "none") {
+        console.log("hidding upload area and starting loading bar")
 
         let container = document.getElementById("loading-container");
         let fill = document.querySelector(".fill");
         let transcript = document.querySelector(".transcript-container").innerHTML;
         console.log(transcript);
 
- if (document.querySelector(".transcript-container").innerHTML != transcript) {
+        console.log("loading bar should be showing");
         container.style.display = "flex";
         console.log(container.style.display);
 
@@ -191,5 +192,6 @@ function transcribeFile(id) {
                 fill.style.width = bar / interval + "%";
             }
         }
+
     }
 }
