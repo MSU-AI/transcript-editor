@@ -19,8 +19,10 @@ function load(){
 function processData(data) { 
     console.log(`%c Before: ${transcriptArea.innerHTML}`,'color: red');
     transcriptArea.innerHTML = "";
+
     console.log(`%c After: ${transcriptArea.innerHTML}`,'color: red');
     transcriptHTML = ` `;
+
     line = '';
     paragraph = `<p>`;
     console.log(data["timestamps"]);
@@ -78,9 +80,13 @@ function processData(data) {
         word.addEventListener("click", (function(time) {
             return function() {
                 let video = document.getElementById("video");
-
+                console.log(`%c Moving to time: ${time}`, `color: red`);
                 // Set the media player's current time to the time attribute
-                video.currentTime = time;
+                if (video.readyState === 4 &&  video.error === null) {
+                    console.log(`The checks to change time in video have passed`, `color: red`);
+                    video.currentTime = time;
+                }
+                console.log(`%c Time is now: ${video.currentTime}`, `color: red`);
                 video.play(); 
             }
         })(time));

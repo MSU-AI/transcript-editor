@@ -24,6 +24,8 @@ async function cutVideo(id, timestamps){
     // Given a dictonary containing a timestamp list, cut the video in according to the timestamps.
     console.log(timestamps);
 
+    loadingBar();
+
     let timestampJson = JSON.stringify(timestamps);
     let timestampList = timestamps["timestamps"];
 
@@ -37,6 +39,7 @@ async function cutVideo(id, timestamps){
     console.log(timestampJson);
 
     var new_id = await makeRequest("/api/cuts/", data);
+    id = new_id["id"];
     
     download_url = await getVideo(new_id["id"]);
     let url = download_url["url"];

@@ -125,6 +125,8 @@ async function uploadFile(file){
 // file transcribe function
 function transcribeFile(id) {
 
+    console.log(`%c The ID that is about the be transcribed ${id}`, `color: red`)
+
     let xhr = new XMLHttpRequest(); //creating new xhr object (AJAX)
 
     // Add event handler to be called when response is collected:
@@ -156,42 +158,48 @@ function transcribeFile(id) {
     // If the upload feild is gone show the loading bar
 
     if (document.getElementById("wrapper").style.display == "none") {
-        console.log("hidding upload area and starting loading bar")
+        console.log(`WIDTH OF BAR: ${document.querySelector(".fill").style.width}`);
+        if(document.querySelector(".fill").style.width == 0 || document.querySelector(".fill").style.width == ''){
+            loadingBar(); 
+        }   
+    }
+}
 
-        let container = document.getElementById("loading-container");
-        let fill = document.querySelector(".fill");
-        let transcript = document.querySelector(".transcript-container").innerHTML;
-        console.log(transcript);
+function loadingBar(){
+    console.log("hidding upload area and starting loading bar")
 
-        console.log("loading bar should be showing");
-        container.style.display = "flex";
-        console.log(container.style.display);
+    let container = document.getElementById("loading-container");
+    let fill = document.querySelector(".fill");
+    let transcript = document.querySelector(".transcript-container").innerHTML;
+    console.log(transcript);
 
-        const messages = ['Loading Transcript...', 'Loading Timeline...', 'Loading Workspace...'];
-        let currentMessageIndex = 0;
-        const pElement = container.querySelector('p');
+    console.log("loading bar should be showing");
+    container.style.display = "flex";
+    console.log(container.style.display);
 
-        function updateMessage() {
-            pElement.textContent = messages[currentMessageIndex];
-            currentMessageIndex = (currentMessageIndex + 1) % messages.length;
+    const messages = ['Loading Transcript...', 'Loading Timeline...', 'Loading Workspace...'];
+    let currentMessageIndex = 0;
+    const pElement = container.querySelector('p');
+
+    function updateMessage() {
+        pElement.textContent = messages[currentMessageIndex];
+        currentMessageIndex = (currentMessageIndex + 1) % messages.length;
+    }
+
+    setInterval(updateMessage, 8000); 
+
+    let interval = video_size / 100000;
+    fill.style.width = 0;
+
+    var bar = 0;
+    var run = setInterval(frames, 2);
+    function frames() {
+        bar++;
+        if (fill.style.width.substring(0, 3) == "100") {
+            clearInterval(run);
+            container.style.display = "none";
+        } else {
+            fill.style.width = bar / interval + "%";
         }
-
-        setInterval(updateMessage, 8000); 
-
-        let interval = video_size / 100000;
-        fill.style.width = 0;
-
-        var bar = 0;
-        var run = setInterval(frames, 2);
-        function frames() {
-            bar++;
-            if (fill.style.width.substring(0, 3) == "100") {
-                clearInterval(run);
-                container.style.display = "none";
-            } else {
-                fill.style.width = bar / interval + "%";
-            }
-        }
-
     }
 }

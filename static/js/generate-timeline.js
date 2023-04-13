@@ -7,6 +7,9 @@ let timelineTimestamps = {"timestamps": []};
 // This function generates the timeline
 function generateTimeline() {
     const video = document.querySelector('#video');
+    
+    console.log(`%c Current Video: ${video.innerHTML}`, `color: red`);
+
     const screenshotContainer = document.querySelector('#screenshotContainer');
     const bar = document.querySelector('#bar');
     let interval;
@@ -26,7 +29,9 @@ function generateTimeline() {
             const img = document.createElement('img');
             img.src = canvas.toDataURL();
             img.classList.add('screenshot');
+            console.log(`%c Adding Click Event Listner: `, `color: red`);
             img.addEventListener('click', (e) => {
+                console.log(`%c clicked timeline at position ${e.clientX}`, `color: red`)
                 updateBarPosition(e.clientX);
             });
             screenshotContainer.appendChild(img);
@@ -44,8 +49,9 @@ function generateTimeline() {
         video.currentTime = 0;
         let fill = document.querySelector(".fill");
         if (document.querySelector(".transcript-container").innerHTML != transcript) {
-                fill.style.width = "100%";
-            }
+            fill.style.width = "100%";
+        }
+        video.removeEventListener('play', generateTimeline);
     });
 
     bar.addEventListener('mousedown', (e) => {
@@ -77,8 +83,15 @@ function generateTimeline() {
     }); 
 }
 
+function resetTimeline() {
+    const video = document.querySelector('#video');
+    const screenshotContainer = document.querySelector('#screenshotContainer');
+    screenshotContainer.innerHTML = '<div id="bar"></div>';
+    video.removeEventListener('play', generateTimeline);
+}
+
 function cuttingMode(){
-    
+
     cutButton.style.display = "none";
     startButton.style.display = "flex";
     endButton.style.display = "flex";
