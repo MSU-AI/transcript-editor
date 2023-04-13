@@ -258,7 +258,6 @@ def cut_files(request):
         # Iterate over each cut:
 
         for cut in cuts:
-            cut = [eval(i) for i in cut]
             print(f"Current timestamp: {cut}")
 
             clip = clip.cutout(cut[0] - total_removed, cut[1] - total_removed)

@@ -17,7 +17,10 @@ function load(){
 }
 
 function processData(data) { 
+    console.log(`%c Before: ${transcriptArea.innerHTML}`,'color: red');
     transcriptArea.innerHTML = "";
+    console.log(`%c After: ${transcriptArea.innerHTML}`,'color: red');
+    transcriptHTML = ` `;
     line = '';
     paragraph = `<p>`;
     console.log(data["timestamps"]);

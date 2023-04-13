@@ -20,8 +20,10 @@ async function makeRequest(url, data) {
 }
 
 async function cutVideo(id, timestamps){
+    console.trace();
     // Given a dictonary containing a timestamp list, cut the video in according to the timestamps.
-    
+    console.log(timestamps);
+
     let timestampJson = JSON.stringify(timestamps);
     let timestampList = timestamps["timestamps"];
 
