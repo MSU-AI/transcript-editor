@@ -258,10 +258,16 @@ def cut_files(request):
         # Iterate over each cut:
 
         for cut in cuts:
-            cut = [eval(i) for i in cut]
             print(f"Current timestamp: {cut}")
 
-            clip = clip.cutout(cut[0] - total_removed, cut[1] - total_removed)
+            # clip = clip.cutout(cut[0] - total_removed, cut[1] - total_removed)
+
+            duration = clip.duration
+
+            first_clip = clip.subclip(0, cut[0] - total_removed)
+            second_clip = clip.subclip(cut[1] - total_removed, duration)
+
+            clip = moviepy.editor.concatenate_videoclips([first_clip, second_clip])
 
             total_removed += cut[1] - cut[0]
 
