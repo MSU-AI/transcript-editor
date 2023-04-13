@@ -93,6 +93,7 @@ function deleteTranscript() {
         selectedWordsArr.forEach(element => {
             console.log(element);
             timestamps["timestamps"].push([parseFloat(element.getAttribute("data-start")), parseFloat(element.getAttribute("data-stop"))]);
+            console.log(timestamps);
             element.remove();
         });
 
