@@ -42,6 +42,10 @@ function generateTimeline() {
         video.playbackRate = 1; // reset the playback rate to normal speed
         video.muted = false; // unmute the video
         video.currentTime = 0;
+        let fill = document.querySelector(".fill");
+        if (document.querySelector(".transcript-container").innerHTML != transcript) {
+                fill.style.width = "100%";
+            }
     });
 
     bar.addEventListener('mousedown', (e) => {
@@ -90,4 +94,9 @@ function endCut(){
 
     timelineTimestamps["timestamps"][0].push(video.currentTime.toString());
     cutVideo(id, timelineTimestamps);
+
+    cutButton.style.display = "flex";
+    startButton.style.display = "none";
+    endButton.style.display = "none";
+
 }

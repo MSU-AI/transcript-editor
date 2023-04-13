@@ -32,6 +32,8 @@ async function cutVideo(id, timestamps){
     data.append('id', id);
     data.append('cuts', timestampJson);
     
+    console.log(timestampJson);
+
     var new_id = await makeRequest("/api/cuts/", data);
     
     download_url = await getVideo(new_id["id"]);
@@ -42,6 +44,10 @@ async function cutVideo(id, timestamps){
 
     source.setAttribute("src", url);
     video.load();
+      
+    transcribeFile(id);
+    generateTimeline();
+
     console.log(source);
 
     console.log("New ID");
