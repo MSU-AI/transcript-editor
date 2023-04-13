@@ -170,7 +170,7 @@ function loadingBar(){
 
     let container = document.getElementById("loading-container");
     let fill = document.querySelector(".fill");
-    let transcript = document.querySelector(".transcript-container").innerHTML;
+    const transcript = document.querySelector(".transcript-container").innerHTML;
     console.log(transcript);
 
     console.log("loading bar should be showing");
@@ -195,7 +195,7 @@ function loadingBar(){
     var run = setInterval(frames, 2);
     function frames() {
         bar++;
-        if (fill.style.width.substring(0, 3) == "100") {
+        if(document.querySelector(".transcript-container").innerHTML != transcript && videoEnded == true) {
             clearInterval(run);
             container.style.display = "none";
         } else {

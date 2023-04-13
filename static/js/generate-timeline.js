@@ -2,10 +2,12 @@ let cutButton = document.getElementById("cut");
 let startButton = document.getElementById("start"); 
 let endButton = document.getElementById("end");
 let timelineTimestamps = {"timestamps": []};
+let videoEnded = false;
 
 
 // This function generates the timeline
 function generateTimeline() {
+    videoEnded = false;
     const video = document.querySelector('#video');
     
     console.log(`%c Current Video: ${video.innerHTML}`, `color: red`);
@@ -47,11 +49,15 @@ function generateTimeline() {
         video.playbackRate = 1; // reset the playback rate to normal speed
         video.muted = false; // unmute the video
         video.currentTime = 0;
-        let fill = document.querySelector(".fill");
-        if (document.querySelector(".transcript-container").innerHTML != transcript) {
-            fill.style.width = "100%";
-        }
+        videoEnded = true;
         video.removeEventListener('play', generateTimeline);
+        video.removeEventListener('timeupdate', generateTimeline);
+    });
+
+     video.addEventListener('timeupdate', () => {
+        const progress = video.currentTime / video.duration;
+        const position = progress * screenshotContainer.clientWidth;
+        bar.style.left = `${position}px`;
     });
 
     bar.addEventListener('mousedown', (e) => {
