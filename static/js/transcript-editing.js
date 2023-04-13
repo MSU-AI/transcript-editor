@@ -5,7 +5,7 @@ let transcript = document.getElementById("transcript");
 let edit_button = document.getElementById("edit-transcript");
 let save_button = document.getElementById("save-transcript");
 let delete_button = document.getElementById("delete-transcript");
-let download_button = document.getElementById("download-transcript");   
+let download_button = document.getElementById("download-transcript");  
 let timestamps = {"timestamps": []};
 
 // This function is called when the user clicks the edit button
@@ -27,6 +27,9 @@ function editTranscript(){
 }
 
 async function saveTranscript(){
+    let video = document.getElementById("video");
+    video.pause();
+
     console.log("saving transcript");
 
     transcript_container.classList.replace('transcript-container-editing','transcript-container');
