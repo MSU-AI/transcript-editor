@@ -115,8 +115,26 @@ function deleteTranscript() {
     });
 }
 
-function downloadTranscript(){
-    console.log("downloading transcript"); 
+async function downloadTranscript(){  
+    console.log("downloading video"); 
+
+    var data = new FormData();
+    data.append('id', id);
+
+    var videoUrl = await makeRequest("/api/get/", data); 
+    var filename = "video.mp4";
+
+    console.log("Download URL:")
+    console.log(videoUrl);
+    console.log(videoUrl["url"]);
+    
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = "blob";
+    xhr.onload = function() {
+        saveAs(xhr.response, filename);
+    };
+    xhr.open("GET", videoUrl["url"]);
+    xhr.send();
 }
 
 
